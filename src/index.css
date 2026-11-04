@@ -1,0 +1,79 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-night: #151515;
+  --color-cream: #F8F6EF;
+  --color-accent: #7B5CFF;
+  --color-accent-hover: #6744fa;
+  --color-accent-light: #9e85ff;
+  --color-accent-glow: rgba(123, 92, 255, 0.25);
+}
+
+@layer base {
+  body {
+    background-color: var(--color-night);
+    color: var(--color-cream);
+    font-family: 'Roboto Condensed', sans-serif;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, .font-headline {
+    font-family: 'Anton', sans-serif;
+    letter-spacing: -0.01em;
+  }
+
+  .font-wordmark {
+    font-family: 'Baloo 2', cursive, sans-serif;
+  }
+
+  .font-text {
+    font-family: 'Roboto Condensed', sans-serif;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #151515;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333333;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent);
+}
+
+/* Marquee Animations */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 25s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Pulse Glow */
+@keyframes softPulse {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.05); opacity: 1; }
+}
+
+.animate-soft-pulse {
+  animation: softPulse 4s ease-in-out infinite;
+}
