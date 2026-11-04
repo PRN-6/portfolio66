@@ -111,3 +111,4 @@ export const NexaFlowDashboardMockup: React.FC<NexaFlowProps> = ({
     </div>
   );
 };
+

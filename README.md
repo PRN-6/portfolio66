@@ -1,24 +1,32 @@
-# PORTFOLIO66 — Creative Studio & Digital Portfolio
+# PORTFOLIO66 — Prinson Nazareth Creative Portfolio
 
-An exact 1:1 recreation of the portfolio reference design, built as a modern, high-performance, and cohesive **Portfolio66 website**.
+A sleek, modern portfolio website for **Prinson Nazareth (PRN-6 / Portfolio66)**, designed with **zero infinite vertical scroll** — each section is a self-contained, screen-fitting view accessible directly from the navigation bar, slide controls, or keyboard arrows.
 
 ---
 
-## 🌟 Key Sections & Features
+## 🌟 Architecture & Pages
 
-Every section from the reference folder has been recreated with pixel precision:
+No endless scrolling: clicking any link in the navigation bar smoothly swaps to that dedicated view:
 
-| Section | Reference File | Component | Description |
-|---|---|---|---|
-| **01 Hero Banner** | `image.png` | `HeroSection.tsx` | Bold Anton headline `PORTFOLIO66`, `BRAND IDENTITY · WEBSITE DESIGN · 2026`, sleek stretched cat mascot illustration, and `Small games for quiet moments.` tagline. |
-| **02 The Studio** | `image copy.png` | `StudioOverviewSection.tsx` | Cream background (`#F8F6EF`), `THE STUDIO`, `CALM PUZZLES, NO STRESS.`, sitting cats ink illustration, and metadata grid (`ROLE`, `TOOLS`, `DELIVERABLES`, `LIVE`). |
-| **03 Logo System** | `image copy 2.png` | `LogoSystemSection.tsx` | Night background (`#151515`), `LOGO`, `TWO CATS, ONE STUDIO.`, rounded squircle badge, and 3 colorway cards (`Cream`, `Violet`, `Dark`). |
-| **04 Color & Type** | `image copy 3.png` | `ColorTypeSystemSection.tsx` | Color swatches (`Night #151515`, `Cream #F8F6EF`, `Moon Violet #7B5CFF`) with 1-click HEX copy + typography specimen (`Anton`, `Roboto Condensed`, `Baloo 2`) with live typing playground. |
-| **05 Full Website Mockup** | `image copy 4.png` | `FullStudioWebsiteMockup.tsx` | Violet container (`ONE SCROLL, THE WHOLE STUDIO.`) with realistic macOS browser window, running marquee, **interactive playable 8x8 Blockmoon puzzle game**, Moon Arrows showcase, Who We Are, Blog, Google Play banner, and footer watermark. |
-| **06 Inner Pages** | `image copy 5.png` | `InnerPagesSection.tsx` | 2x2 grid of inner page mockups: `GAMES`, `BLOG` (with interactive filter pills), `FAQ` (with smooth animated accordions), and `SAY HELLO` (with working contact form and validation). |
-| **07 Mobile Showcase** | `image copy 6.png` | `MobileShowcaseSection.tsx` | `MADE FOR ONE HAND.` with 5 realistic iPhone frames (Mobile Home, Fullscreen Navigation Menu, Mobile Games, Mobile Blog, and Mobile FAQ). |
-| **08 Social & Sharing** | `image copy 7.png` | `SocialSection.tsx` | `EVERY LINK LOOKS LIKE US.` with 4 Open Graph cards (Home, Games, Blog) and adaptive 512px app icon badge. |
-| **09 Direct Contact** | Custom | `App.tsx` | Dedicated `SAY HELLO` contact section with interactive form, direct email link, and social channels. |
+| Page Tab | Component | Description |
+|---|---|---|
+| **01 HOME** | `HeroSection.tsx` | Bold Anton headline `PRINSON NAZARETH`, `FULL-STACK DEVELOPER · 2026`, sleek stretched cat mascot illustration, and tagline. |
+| **02 ABOUT** | `StudioOverviewSection.tsx` | Warm cream background (`#F8F6EF`), `THE CREATOR`, `CLEAN CODE, NO STRESS.`, sitting cats ink illustration, role, tech stack, and GitHub profile. |
+| **03 IDENTITY** | `LogoSystemSection.tsx` | Night background (`#151515`), `PHILOSOPHY`, `TWO CATS, ONE STUDIO.`, rounded squircle badge, and 3 colorway cards (`Cream`, `Violet`, `Dark`). |
+| **04 SYSTEM** | `ColorTypeSystemSection.tsx` | Color swatches (`Night #151515`, `Cream #F8F6EF`, `Moon Violet #7B5CFF`) with 1-click HEX copy + typography specimen (`Anton`, `Roboto Condensed`, `Baloo 2`) with live typing tester. |
+| **05 PROJECTS** | `ProjectsPage.tsx` | Featured full-stack engineering works: **NexaFlow Cloud** (real-time telemetry dashboard) and **Aura Design Tokens** (accessible component library). |
+| **06 ARTICLES** | `ArticlesPage.tsx` | Technical engineering logs and essays with real-time category filter pills (`DEVLOG`, `UI/UX`, `ESSAYS`, `TUTORIALS`). |
+| **07 FAQ** | `FaqPage.tsx` | Interactive accordions answering common questions on tech stack, roles, timezones, and code quality. |
+| **08 CONTACT** | `ContactPage.tsx` | Dedicated `SAY HELLO` view with interactive form (celebratory confetti on send), direct email `prinsonnazareth2@gmail.com`, and GitHub links. |
+
+---
+
+## 🎮 Navigation Controls
+
+- **Top Navbar**: Jump directly to any of the 8 pages in one click.
+- **Bottom Slide Controls**: Flip between pages using `← PREV` / `NEXT →` or click any pagination indicator dot.
+- **Keyboard Navigation**: Press **Left Arrow (`←`)** and **Right Arrow (`→`)** to flip pages like an interactive slide deck.
+- **URL Hash Synchronization**: Direct linking to any page via hash (e.g. `/#projects`, `/#contact`, `/#about`).
 
 ---
 
@@ -29,8 +37,8 @@ Every section from the reference folder has been recreated with pixel precision:
 - **Styling**: Tailwind CSS v3
 - **Icons**: Lucide React
 - **Typography**: Anton (Headlines), Roboto Condensed (Body & Text), Baloo 2 (Wordmark)
-- **Effects**: Canvas Confetti for puzzle clears and contact submissions
-- **Vector Artwork**: Custom scalable SVG components for pixel-perfect resolution on 4K, Retina, and mobile screens
+- **Effects**: Canvas Confetti for form submissions
+- **Vector Artwork**: 100% scalable custom SVG components for crisp display on 4K, Retina, and mobile screens
 
 ---
 
@@ -40,9 +48,9 @@ Every section from the reference folder has been recreated with pixel precision:
 - Node.js (v18+ or later)
 - npm
 
-### Installation
+### Installation & Development
 ```bash
-# Navigate to the workspace
+# Navigate to project directory
 cd protfolio66
 
 # Install dependencies
@@ -52,27 +60,16 @@ npm install
 npm run dev
 ```
 
-Visit `http://localhost:5173` (or the port Vite provides) in your browser.
+Visit `http://localhost:5173` in your browser.
 
 ### Building for Production
 ```bash
-# Typecheck and build optimized bundle
+# Typecheck and build optimized production bundle
 npm run build
 
 # Preview production build locally
 npm run preview
 ```
-
----
-
-## 🎨 Design System
-
-- **Night**: `#151515` (Deep, restful dark background)
-- **Cream**: `#F8F6EF` (Soft warm paper-like tint that eliminates eye strain)
-- **Moon Violet**: `#7B5CFF` (Playful vibrant violet used selectively for titles, CTAs and mascot highlights)
-- **Headline Font**: `Anton`
-- **Body Font**: `Roboto Condensed`
-- **Wordmark Font**: `Baloo 2`
 
 ---
 
