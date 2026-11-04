@@ -1,77 +1,61 @@
-# PORTFOLIO66 — Prinson Nazareth Creative Portfolio
+# PORTFOLIO66 - Universal Creative Portfolio Template
 
-A sleek, modern portfolio website for **Prinson Nazareth (PRN-6 / Portfolio66)**, designed with **zero infinite vertical scroll** — each section is a self-contained, screen-fitting view accessible directly from the navigation bar, slide controls, or keyboard arrows.
+A sleek, modern portfolio website template designed with **zero infinite vertical scroll** — each section is a self-contained, screen-fitting view accessible directly from the top navigation bar or keyboard arrows.
 
----
-
-## 🌟 Architecture & Pages
-
-No endless scrolling: clicking any link in the navigation bar smoothly swaps to that dedicated view:
-
-| Page Tab | Component | Description |
-|---|---|---|
-| **01 HOME** | `HeroSection.tsx` | Bold Anton headline `PRINSON NAZARETH`, `FULL-STACK DEVELOPER · 2026`, sleek stretched cat mascot illustration, and tagline. |
-| **02 ABOUT** | `StudioOverviewSection.tsx` | Warm cream background (`#F8F6EF`), `THE CREATOR`, `CLEAN CODE, NO STRESS.`, sitting cats ink illustration, role, tech stack, and GitHub profile. |
-| **03 IDENTITY** | `LogoSystemSection.tsx` | Night background (`#151515`), `PHILOSOPHY`, `TWO CATS, ONE STUDIO.`, rounded squircle badge, and 3 colorway cards (`Cream`, `Violet`, `Dark`). |
-| **04 SYSTEM** | `ColorTypeSystemSection.tsx` | Color swatches (`Night #151515`, `Cream #F8F6EF`, `Moon Violet #7B5CFF`) with 1-click HEX copy + typography specimen (`Anton`, `Roboto Condensed`, `Baloo 2`) with live typing tester. |
-| **05 PROJECTS** | `ProjectsPage.tsx` | Featured full-stack engineering works: **NexaFlow Cloud** (real-time telemetry dashboard) and **Aura Design Tokens** (accessible component library). |
-| **06 ARTICLES** | `ArticlesPage.tsx` | Technical engineering logs and essays with real-time category filter pills (`DEVLOG`, `UI/UX`, `ESSAYS`, `TUTORIALS`). |
-| **07 FAQ** | `FaqPage.tsx` | Interactive accordions answering common questions on tech stack, roles, timezones, and code quality. |
-| **08 CONTACT** | `ContactPage.tsx` | Dedicated `SAY HELLO` view with interactive form (celebratory confetti on send), direct email `prinsonnazareth2@gmail.com`, and GitHub links. |
+Built with **React 19**, **TypeScript**, **Tailwind CSS**, and **Framer Motion**, matching the visual design language from the reference:
+- **Night (`#151515`)**: Deep, restful dark background.
+- **Cream (`#F8F6EF`)**: Soft warm tint for comfortable reading.
+- **Moon Violet (`#7B5CFF`)**: Bold energetic accent for headlines, primary buttons, and focus points.
+- **Distinctive Typography**: **Anton** for headlines, **Roboto Condensed** for clean body text, and **Baloo 2** for organic wordmarks.
+- **Studio Ethos Illustration**: Two cats (one curious in violet outline, one calm in solid black under a sparkle star).
 
 ---
 
-## 🎮 Navigation Controls
+## 🧭 Pages & Single-Screen Architecture
 
-- **Top Navbar**: Jump directly to any of the 8 pages in one click.
-- **Bottom Slide Controls**: Flip between pages using `← PREV` / `NEXT →` or click any pagination indicator dot.
-- **Keyboard Navigation**: Press **Left Arrow (`←`)** and **Right Arrow (`→`)** to flip pages like an interactive slide deck.
-- **URL Hash Synchronization**: Direct linking to any page via hash (e.g. `/#projects`, `/#contact`, `/#about`).
-
----
-
-## 🛠️ Tech Stack
-
-- **Framework**: React 19 + TypeScript
-- **Bundler**: Vite
-- **Styling**: Tailwind CSS v3
-- **Icons**: Lucide React
-- **Typography**: Anton (Headlines), Roboto Condensed (Body & Text), Baloo 2 (Wordmark)
-- **Effects**: Canvas Confetti for form submissions
-- **Vector Artwork**: 100% scalable custom SVG components for crisp display on 4K, Retina, and mobile screens
+| Page ID | Component | Description |
+| :--- | :--- | :--- |
+| **01 HOME** | `HeroSection.tsx` | Bold Anton headline `YOUR NAME`, `FULL-STACK DEVELOPER · 2026`, sleek stretched cat mascot with idle float animation, and tagline. |
+| **02 ABOUT** | `StudioOverviewSection.tsx` | Two-column layout: studio ethos copy & deliverables grid alongside the sitting cats illustration. |
+| **03 IDENTITY** | `LogoSystemSection.tsx` | Star & cat logo philosophy showcase + 3 colorway cards (`Cream`, `Violet`, `Dark`). |
+| **04 SYSTEM** | `ColorTypeSystemSection.tsx` | Color token swatch cards with click-to-copy HEX codes and live editable typographic specimen tester. |
+| **05 PROJECTS** | `ProjectsPage.tsx` | Cloud engineering & design systems showcase featuring interactive NexaFlow and Aura UI component mockups. |
+| **06 ARTICLES** | `ArticlesPage.tsx` | Technical articles and essays with interactive category filter pills (`DEVLOG`, `UI/UX`, `ESSAYS`, `TUTORIALS`). |
+| **07 FAQ** | `FaqPage.tsx` | Interactive smooth accordion FAQ addressing common inquiries from founders and hiring teams. |
+| **08 CONTACT** | `ContactPage.tsx` | Dedicated `SAY HELLO` view with interactive form (celebratory confetti on send), direct email, and social links. |
 
 ---
 
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js (v18+ or later)
-- npm
+- Node.js 18+
+- npm or pnpm
 
-### Installation & Development
+### Installation
 ```bash
-# Navigate to project directory
-cd protfolio66
-
-# Install dependencies
+git clone https://github.com/PRN-6/portfolio66.git
+cd portfolio66
 npm install
+```
 
-# Start development server
+### Development
+```bash
 npm run dev
 ```
 
-Visit `http://localhost:5173` in your browser.
-
-### Building for Production
+### Production Build
 ```bash
-# Typecheck and build optimized production bundle
 npm run build
-
-# Preview production build locally
-npm run preview
 ```
 
 ---
 
-## 📄 License
-MIT — Free to use, adapt, and deploy.
+## 🎨 Customizing for Yourself
+
+All content and branding can be edited in a single file:
+[`src/portfolioData.ts`](src/portfolioData.ts):
+- Update `studioName`: Change `'YOUR NAME'` to your actual name.
+- Update `contactEmail`: Change `'yourname@example.com'` to your personal email.
+- Update `githubUrl`: Change `'https://github.com/yourusername'` to your GitHub profile.
+- Update projects and articles in `portfolio66Data`.

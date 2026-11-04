@@ -11,7 +11,7 @@ export const SocialShareKit: React.FC = () => {
       <div className="group relative bg-[#151515] rounded-3xl p-6 sm:p-8 border border-white/10 shadow-2xl overflow-hidden flex flex-col justify-between min-h-[300px] sm:min-h-[340px] transition-transform duration-300 hover:scale-[1.01]">
         {/* Header */}
         <div className="flex items-center justify-between z-10">
-          <CatLogoBadge size={44} showText textColor="#FFFFFF" brandName="PRINSON NAZARETH" />
+          <CatLogoBadge size={44} showText textColor="#FFFFFF" brandName="YOUR NAME" />
           <span className="text-[10px] tracking-widest uppercase text-white/50 border border-white/20 px-2.5 py-1 rounded-full">
             OG : PORTFOLIO
           </span>
@@ -34,7 +34,7 @@ export const SocialShareKit: React.FC = () => {
 
         {/* Footer */}
         <div className="z-10 text-xs text-white/60 font-medium">
-          github.com/PRN-6 · React 19 · TypeScript · Tailwind
+          github.com/yourusername · React 19 · TypeScript · Tailwind
         </div>
       </div>
 
@@ -42,7 +42,7 @@ export const SocialShareKit: React.FC = () => {
       <div className="group relative bg-[#7B5CFF] rounded-3xl p-6 sm:p-8 shadow-2xl overflow-hidden flex flex-col justify-between min-h-[300px] sm:min-h-[340px] transition-transform duration-300 hover:scale-[1.01]">
         {/* Header */}
         <div className="flex items-center justify-between z-10">
-          <CatLogoBadge size={44} showText textColor="#FFFFFF" brandName="PRINSON NAZARETH" />
+          <CatLogoBadge size={44} showText textColor="#FFFFFF" brandName="YOUR NAME" />
           <span className="text-[10px] tracking-widest uppercase text-white/80 border border-white/30 px-2.5 py-1 rounded-full">
             OG : PROJECTS
           </span>
@@ -91,7 +91,7 @@ export const SocialShareKit: React.FC = () => {
       <div className="group relative bg-[#F8F6EF] text-[#151515] rounded-3xl p-6 sm:p-8 border border-[#ded8c4] shadow-2xl overflow-hidden flex flex-col justify-between min-h-[300px] sm:min-h-[340px] transition-transform duration-300 hover:scale-[1.01]">
         {/* Header */}
         <div className="flex items-center justify-between z-10">
-          <CatLogoBadge size={44} showText textColor="#151515" brandName="PRINSON NAZARETH" />
+          <CatLogoBadge size={44} showText textColor="#151515" brandName="YOUR NAME" />
           <span className="text-[10px] tracking-widest uppercase text-black/60 border border-black/20 px-2.5 py-1 rounded-full">
             OG : ARTICLES
           </span>

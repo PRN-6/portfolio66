@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import type { PortfolioConfig } from '../portfolioData';
 import { Copy, Check, Type } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 interface ColorTypeSystemProps {
   data: PortfolioConfig;
@@ -44,11 +45,16 @@ export const ColorTypeSystemSection: React.FC<ColorTypeSystemProps> = ({ data })
   ];
 
   return (
-    <section className="relative w-full min-h-[calc(100vh-140px)] bg-[#F8F6EF] text-[#151515] py-8 sm:py-12 px-4 sm:px-8 flex flex-col justify-between">
+    <section className="relative w-full min-h-[calc(100vh-80px)] bg-[#F8F6EF] text-[#151515] py-6 sm:py-8 px-4 sm:px-8 flex flex-col justify-between">
       <div className="max-w-7xl mx-auto w-full flex-1 flex flex-col justify-between">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 my-auto py-2">
           {/* ================= LEFT COLUMN: COLOR ================= */}
-          <div className="lg:col-span-6 flex flex-col justify-between space-y-4">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            className="lg:col-span-6 flex flex-col justify-between space-y-4"
+          >
             <div>
               {/* Moon Violet Tag */}
               <span className="font-text font-bold text-xs sm:text-sm tracking-[0.25em] uppercase text-[#7B5CFF] block mb-4">
@@ -58,11 +64,13 @@ export const ColorTypeSystemSection: React.FC<ColorTypeSystemProps> = ({ data })
               {/* 3 Large Swatch Cards */}
               <div className="grid grid-cols-3 gap-3 sm:gap-4 mb-4">
                 {colors.map((c) => (
-                  <div
+                  <motion.div
                     key={c.key}
+                    whileHover={{ y: -8, scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                     onClick={() => copyToClipboard(c.hex)}
                     title="Click to copy HEX code"
-                    className={`relative h-56 sm:h-72 rounded-2xl sm:rounded-3xl p-4 flex flex-col justify-end shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl cursor-pointer border ${c.cardBg} ${c.textColor} ${c.border}`}
+                    className={`relative h-56 sm:h-72 rounded-2xl sm:rounded-3xl p-4 flex flex-col justify-end shadow-md transition-shadow hover:shadow-xl cursor-pointer border ${c.cardBg} ${c.textColor} ${c.border}`}
                   >
                     {/* Copy Icon on hover */}
                     <div className="absolute top-4 right-4 opacity-70 hover:opacity-100 transition-opacity">
@@ -84,7 +92,7 @@ export const ColorTypeSystemSection: React.FC<ColorTypeSystemProps> = ({ data })
                         {c.hex}
                       </span>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
 
@@ -93,10 +101,15 @@ export const ColorTypeSystemSection: React.FC<ColorTypeSystemProps> = ({ data })
                 {data.designSystem.colors.rationale}
               </p>
             </div>
-          </div>
+          </motion.div>
 
           {/* ================= RIGHT COLUMN: TYPE ================= */}
-          <div className="lg:col-span-6 space-y-6">
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="lg:col-span-6 space-y-6"
+          >
             <div>
               {/* Moon Violet Tag */}
               <span className="font-text font-bold text-xs sm:text-sm tracking-[0.25em] uppercase text-[#7B5CFF] block mb-4">
@@ -172,7 +185,7 @@ export const ColorTypeSystemSection: React.FC<ColorTypeSystemProps> = ({ data })
                 />
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

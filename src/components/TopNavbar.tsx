@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { CatLogoBadge } from './illustrations/CatLogoBadge';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export type NavPageId =
   | 'home'
@@ -19,7 +20,7 @@ interface TopNavbarProps {
 }
 
 export const TopNavbar: React.FC<TopNavbarProps> = ({
-  studioName = 'PRINSON NAZARETH',
+  studioName = 'YOUR NAME',
   activePage,
   onSelectPage,
 }) => {
@@ -42,12 +43,14 @@ export const TopNavbar: React.FC<TopNavbarProps> = ({
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-[#151515]/95 backdrop-blur-md border-b border-[#252525] py-3.5 px-4 sm:px-8">
+    <header className="sticky top-0 z-50 w-full bg-[#151515]/95 backdrop-blur-md border-b border-[#252525] py-3 px-4 sm:px-8">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Brand / Logo */}
-        <button
+        <motion.button
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
           onClick={() => handleNavClick('home')}
-          className="flex items-center gap-3 group text-left"
+          className="flex items-center gap-3 group text-left cursor-pointer"
         >
           <CatLogoBadge size={36} variant="badge-only" />
           <div className="flex flex-col sm:flex-row sm:items-center sm:gap-2">
@@ -58,53 +61,68 @@ export const TopNavbar: React.FC<TopNavbarProps> = ({
               PORTFOLIO66
             </span>
           </div>
-        </button>
+        </motion.button>
 
-        {/* Desktop Navbar: Page Selector Tabs (No scroll, direct page change) */}
+        {/* Desktop Navbar: Page Selector Tabs with Smooth Framer Motion Pill */}
         <nav className="hidden lg:flex items-center gap-1 bg-[#1a1a1a] p-1.5 rounded-full border border-white/10 text-xs font-headline tracking-wider">
-          {navLinks.map((link) => (
-            <button
-              key={link.id}
-              onClick={() => handleNavClick(link.id)}
-              className={`px-3.5 py-1.5 rounded-full transition-all duration-200 ${
-                activePage === link.id
-                  ? 'bg-[#7B5CFF] text-white shadow-md'
-                  : 'text-white/60 hover:text-white hover:bg-white/5'
-              }`}
-            >
-              {link.label}
-            </button>
-          ))}
+          {navLinks.map((link) => {
+            const isActive = activePage === link.id;
+            return (
+              <button
+                key={link.id}
+                onClick={() => handleNavClick(link.id)}
+                className={`relative px-3.5 py-1.5 rounded-full transition-colors duration-200 cursor-pointer ${
+                  isActive ? 'text-white' : 'text-white/60 hover:text-white'
+                }`}
+              >
+                {isActive && (
+                  <motion.div
+                    layoutId="activeNavPill"
+                    className="absolute inset-0 bg-[#7B5CFF] rounded-full shadow-md -z-10"
+                    transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                  />
+                )}
+                <span className="relative z-10">{link.label}</span>
+              </button>
+            );
+          })}
         </nav>
 
         {/* Right CTA */}
         <div className="hidden sm:flex items-center gap-3">
-          <button
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             onClick={() => handleNavClick('contact')}
-            className={`flex items-center gap-1.5 text-xs font-headline tracking-wider px-4 py-2 rounded-full transition-all shadow-md active:scale-95 ${
+            className={`flex items-center gap-1.5 text-xs font-headline tracking-wider px-4 py-2 rounded-full transition-all shadow-md cursor-pointer ${
               activePage === 'contact'
                 ? 'bg-white text-[#151515]'
-                : 'bg-[#7B5CFF] hover:bg-[#6846ed] text-white hover:scale-105'
+                : 'bg-[#7B5CFF] hover:bg-[#6846ed] text-white'
             }`}
           >
             <span>GET IN TOUCH</span>
             <ArrowUpRight size={14} />
-          </button>
+          </motion.button>
         </div>
 
         {/* Mobile Hamburger Button */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="lg:hidden text-white p-2 hover:bg-white/10 rounded-xl transition-colors"
+          className="lg:hidden text-white p-2 hover:bg-white/10 rounded-xl transition-colors cursor-pointer"
           aria-label="Toggle menu"
         >
           {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
-      {/* Mobile Fullscreen Navigation Overlay (Direct Page Selection) */}
+      {/* Mobile Fullscreen Navigation Overlay */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 top-[65px] z-50 bg-[#151515] p-6 flex flex-col justify-between animate-fadeIn lg:hidden overflow-y-auto">
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          className="fixed inset-0 top-[65px] z-50 bg-[#151515] p-6 flex flex-col justify-between lg:hidden overflow-y-auto"
+        >
           <div className="space-y-2 pt-2">
             {navLinks.map((link) => (
               <button
@@ -134,10 +152,10 @@ export const TopNavbar: React.FC<TopNavbarProps> = ({
               GET IN TOUCH
             </button>
             <div className="text-center text-xs text-white/50">
-              Prinson Nazareth · PRN-6 / Portfolio66
+              {studioName} · PORTFOLIO66
             </div>
           </div>
-        </div>
+        </motion.div>
       )}
     </header>
   );

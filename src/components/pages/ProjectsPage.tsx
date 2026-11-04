@@ -3,7 +3,8 @@ import type { PortfolioConfig } from '../../portfolioData';
 import { NexaFlowDashboardMockup } from '../illustrations/NexaFlowDashboardMockup';
 import { AuraUIDesignMockup } from '../illustrations/AuraUIDesignMockup';
 import { GithubIcon } from '../illustrations/GithubIcon';
-import { ArrowRight, Code2, Sparkles, ExternalLink } from 'lucide-react';
+import { ArrowRight, Code2 } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 interface ProjectsPageProps {
   data: PortfolioConfig;
@@ -12,10 +13,15 @@ interface ProjectsPageProps {
 
 export const ProjectsPage: React.FC<ProjectsPageProps> = ({ data, onNavigate }) => {
   return (
-    <section className="relative w-full min-h-[calc(100vh-140px)] bg-[#7B5CFF] text-white py-8 sm:py-12 px-4 sm:px-8 flex flex-col justify-between">
+    <section className="relative w-full min-h-[calc(100vh-80px)] bg-[#7B5CFF] text-white py-6 sm:py-8 px-4 sm:px-8 flex flex-col justify-between">
       <div className="max-w-7xl mx-auto w-full flex-1 flex flex-col justify-between">
         {/* Top Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6"
+        >
           <div>
             <span className="font-text font-bold text-xs sm:text-sm tracking-[0.25em] uppercase text-white/80 block mb-1">
               ENGINEERING PORTFOLIO
@@ -27,15 +33,21 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({ data, onNavigate }) 
 
           <div className="flex items-center gap-2">
             <span className="text-xs bg-black/20 border border-white/20 px-3.5 py-1.5 rounded-full font-headline tracking-wider">
-              PRINSON NAZARETH · 2026
+              {data.meta.studioName} · 2026
             </span>
           </div>
-        </div>
+        </motion.div>
 
-        {/* 2 Featured Projects Side-by-Side or Stacked Grid */}
+        {/* 2 Featured Projects Side-by-Side Grid with Framer Motion */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 my-auto py-2">
           {/* Project 1: NexaFlow Cloud */}
-          <div className="bg-[#151515] rounded-3xl p-6 sm:p-8 border border-white/20 shadow-2xl flex flex-col justify-between">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            whileHover={{ y: -6 }}
+            className="bg-[#151515] rounded-3xl p-6 sm:p-8 border border-white/20 shadow-2xl flex flex-col justify-between transition-shadow hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
+          >
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <span className="text-[10px] font-bold tracking-widest text-[#7B5CFF] bg-[#7B5CFF]/20 px-3 py-1 rounded-full uppercase">
@@ -62,7 +74,7 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({ data, onNavigate }) 
                 href={data.meta.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-[#7B5CFF] hover:bg-[#6846ed] text-white px-5 py-2.5 rounded-full font-headline text-xs tracking-wider transition-all"
+                className="inline-flex items-center gap-2 bg-[#7B5CFF] hover:bg-[#6846ed] text-white px-5 py-2.5 rounded-full font-headline text-xs tracking-wider transition-all cursor-pointer"
               >
                 <GithubIcon size={14} />
                 <span>GITHUB REPO</span>
@@ -70,10 +82,16 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({ data, onNavigate }) 
               </a>
               <span className="text-xs font-mono text-white/40">React 19 · WebSocket · Go</span>
             </div>
-          </div>
+          </motion.div>
 
           {/* Project 2: Aura Design System */}
-          <div className="bg-[#F8F6EF] text-[#151515] rounded-3xl p-6 sm:p-8 border border-[#ded8c4] shadow-2xl flex flex-col justify-between">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            whileHover={{ y: -6 }}
+            className="bg-[#F8F6EF] text-[#151515] rounded-3xl p-6 sm:p-8 border border-[#ded8c4] shadow-2xl flex flex-col justify-between transition-shadow hover:shadow-[0_20px_50px_rgba(0,0,0,0.3)]"
+          >
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <span className="text-[10px] font-bold tracking-widest text-[#7B5CFF] bg-[#7B5CFF]/15 px-3 py-1 rounded-full uppercase">
@@ -100,7 +118,7 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({ data, onNavigate }) 
                 href={data.meta.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-[#151515] hover:bg-black text-white px-5 py-2.5 rounded-full font-headline text-xs tracking-wider transition-all"
+                className="inline-flex items-center gap-2 bg-[#151515] hover:bg-black text-white px-5 py-2.5 rounded-full font-headline text-xs tracking-wider transition-all cursor-pointer"
               >
                 <Code2 size={14} />
                 <span>EXPLORE TOKENS</span>
@@ -108,19 +126,24 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({ data, onNavigate }) 
               </a>
               <span className="text-xs font-mono text-[#151515]/50">TypeScript · Tailwind · Radix</span>
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-6 border-t border-white/20 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/80">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.4, delay: 0.3 }}
+          className="pt-6 border-t border-white/20 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/80"
+        >
           <span>All repositories open source and tested for high-volume production.</span>
           <button
             onClick={() => onNavigate?.('contact')}
-            className="underline hover:text-white font-headline tracking-wider uppercase"
+            className="underline hover:text-white font-headline tracking-wider uppercase cursor-pointer"
           >
             Need a custom web application? Let's talk →
           </button>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

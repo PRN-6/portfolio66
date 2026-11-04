@@ -11,7 +11,7 @@ import { ProjectsPage } from './components/pages/ProjectsPage';
 import { ArticlesPage } from './components/pages/ArticlesPage';
 import { FaqPage } from './components/pages/FaqPage';
 import { ContactPage } from './components/pages/ContactPage';
-import { ChevronLeft, ChevronRight, Heart } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const PAGE_ORDER: NavPageId[] = [
   'home',
@@ -48,7 +48,7 @@ export function App() {
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
-  // Keyboard navigation (ArrowLeft & ArrowRight to flip pages like slides)
+  // Keyboard navigation (ArrowLeft & ArrowRight to flip pages seamlessly)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       // Don't intercept if user is typing in an input or textarea
@@ -56,9 +56,11 @@ export function App() {
         return;
       }
       if (e.key === 'ArrowRight') {
-        handleNext();
+        const nextIndex = currentIndex < PAGE_ORDER.length - 1 ? currentIndex + 1 : 0;
+        setActivePage(PAGE_ORDER[nextIndex]);
       } else if (e.key === 'ArrowLeft') {
-        handlePrev();
+        const prevIndex = currentIndex > 0 ? currentIndex - 1 : PAGE_ORDER.length - 1;
+        setActivePage(PAGE_ORDER[prevIndex]);
       }
     };
     window.addEventListener('keydown', handleKeyDown);
@@ -67,123 +69,72 @@ export function App() {
 
   const currentIndex = PAGE_ORDER.indexOf(activePage);
 
-  const handlePrev = () => {
-    const prevIndex = currentIndex > 0 ? currentIndex - 1 : PAGE_ORDER.length - 1;
-    setActivePage(PAGE_ORDER[prevIndex]);
-  };
-
-  const handleNext = () => {
-    const nextIndex = currentIndex < PAGE_ORDER.length - 1 ? currentIndex + 1 : 0;
-    setActivePage(PAGE_ORDER[nextIndex]);
-  };
-
   return (
-    <div className="min-h-screen bg-[#151515] text-[#F8F6EF] font-text flex flex-col justify-between selection:bg-[#7B5CFF] selection:text-white">
-      {/* Top Navigation Bar: Click to go to any page */}
+    <div className="min-h-screen bg-[#151515] text-[#F8F6EF] font-text flex flex-col selection:bg-[#7B5CFF] selection:text-white overflow-x-hidden">
+      {/* Top Navigation Bar: Seamless single-screen view switching */}
       <TopNavbar
         studioName={data.meta.studioName}
         activePage={activePage}
         onSelectPage={(page) => setActivePage(page)}
       />
 
-      {/* Main Single Page View Container (One page at a time, no endless scroll) */}
-      <main className="flex-1 flex flex-col justify-center animate-fadeIn relative">
-        {activePage === 'home' && (
-          <HeroSection
-            data={data}
-            onNavigate={(page) => setActivePage(page)}
-          />
-        )}
-
-        {activePage === 'about' && (
-          <StudioOverviewSection
-            data={data}
-            onNavigate={(page) => setActivePage(page)}
-          />
-        )}
-
-        {activePage === 'identity' && (
-          <LogoSystemSection data={data} />
-        )}
-
-        {activePage === 'system' && (
-          <ColorTypeSystemSection data={data} />
-        )}
-
-        {activePage === 'projects' && (
-          <ProjectsPage
-            data={data}
-            onNavigate={(page) => setActivePage(page)}
-          />
-        )}
-
-        {activePage === 'articles' && (
-          <ArticlesPage data={data} />
-        )}
-
-        {activePage === 'faq' && (
-          <FaqPage
-            data={data}
-            onNavigate={(page) => setActivePage(page)}
-          />
-        )}
-
-        {activePage === 'contact' && (
-          <ContactPage data={data} />
-        )}
-      </main>
-
-      {/* Bottom Controls Bar (Pagination, Indicators, Flip Buttons) */}
-      <footer className="w-full bg-[#121212] border-t border-[#252525] py-3 px-4 sm:px-8 z-40">
-        <div className="max-w-7xl mx-auto flex items-center justify-between text-xs font-headline tracking-widest uppercase">
-          {/* Left: Page info */}
-          <div className="flex items-center gap-2 text-white/60">
-            <span className="text-[#7B5CFF] font-bold">
-              0{currentIndex + 1} / 0{PAGE_ORDER.length}
-            </span>
-            <span className="hidden sm:inline text-white/30">•</span>
-            <span className="hidden sm:inline text-white/80">
-              {activePage}
-            </span>
-          </div>
-
-          {/* Center: Slide indicator dots */}
-          <div className="flex items-center gap-1.5">
-            {PAGE_ORDER.map((pageId, idx) => (
-              <button
-                key={pageId}
-                onClick={() => setActivePage(pageId)}
-                title={`Go to ${pageId}`}
-                className={`h-2 rounded-full transition-all duration-300 ${
-                  activePage === pageId
-                    ? 'w-7 bg-[#7B5CFF]'
-                    : 'w-2 bg-white/20 hover:bg-white/40'
-                }`}
+      {/* Main Single Page View Container with Framer Motion transitions (No bottom footer bar) */}
+      <main className="flex-1 flex flex-col relative w-full overflow-hidden">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activePage}
+            initial={{ opacity: 0, y: 12, scale: 0.995 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -12, scale: 0.995 }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            className="w-full flex-1 flex flex-col justify-center"
+          >
+            {activePage === 'home' && (
+              <HeroSection
+                data={data}
+                onNavigate={(page) => setActivePage(page)}
               />
-            ))}
-          </div>
+            )}
 
-          {/* Right: Previous & Next Page controls */}
-          <div className="flex items-center gap-2">
-            <button
-              onClick={handlePrev}
-              title="Previous Page (Left Arrow)"
-              className="flex items-center gap-1 px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-white/80 hover:text-white transition-colors border border-white/10 active:scale-95"
-            >
-              <ChevronLeft size={14} />
-              <span className="hidden sm:inline">PREV</span>
-            </button>
-            <button
-              onClick={handleNext}
-              title="Next Page (Right Arrow)"
-              className="flex items-center gap-1 px-3 py-1.5 rounded-full bg-[#7B5CFF] hover:bg-[#6846ed] text-white transition-all shadow-md active:scale-95"
-            >
-              <span className="hidden sm:inline">NEXT</span>
-              <ChevronRight size={14} />
-            </button>
-          </div>
-        </div>
-      </footer>
+            {activePage === 'about' && (
+              <StudioOverviewSection
+                data={data}
+                onNavigate={(page) => setActivePage(page)}
+              />
+            )}
+
+            {activePage === 'identity' && (
+              <LogoSystemSection data={data} />
+            )}
+
+            {activePage === 'system' && (
+              <ColorTypeSystemSection data={data} />
+            )}
+
+            {activePage === 'projects' && (
+              <ProjectsPage
+                data={data}
+                onNavigate={(page) => setActivePage(page)}
+              />
+            )}
+
+            {activePage === 'articles' && (
+              <ArticlesPage data={data} />
+            )}
+
+            {activePage === 'faq' && (
+              <FaqPage
+                data={data}
+                onNavigate={(page) => setActivePage(page)}
+              />
+            )}
+
+            {activePage === 'contact' && (
+              <ContactPage data={data} />
+            )}
+          </motion.div>
+        </AnimatePresence>
+      </main>
     </div>
   );
 }

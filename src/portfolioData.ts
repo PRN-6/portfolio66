@@ -83,32 +83,32 @@ export interface PortfolioConfig {
 
 export const portfolio66Data: PortfolioConfig = {
   meta: {
-    studioName: 'PRINSON NAZARETH',
+    studioName: 'YOUR NAME',
     brandHandle: 'PORTFOLIO66',
-    projectTitle: 'Prinson Nazareth | Portfolio66 — Full-Stack Developer & UI/UX Designer',
+    projectTitle: 'YOUR NAME | Portfolio66 — Full-Stack Developer & UI/UX Designer',
     discipline: 'FULL-STACK DEVELOPER · CREATIVE TECHNOLOGIST · 2026',
     year: '2026',
     tagline: 'Crafting clean code, calm software & intuitive digital experiences.',
     subTagline: 'Modern full-stack web applications, accessible design systems, and responsive user experiences built with performance, precision, and care.',
-    liveUrl: 'https://github.com/PRN-6/portfolio66',
-    contactEmail: 'prinsonnazareth2@gmail.com',
-    githubUrl: 'https://github.com/PRN-6',
+    liveUrl: 'https://github.com/yourusername/portfolio66',
+    contactEmail: 'yourname@example.com',
+    githubUrl: 'https://github.com/yourusername',
   },
   overview: {
     tag: 'THE CREATOR',
     headline: 'CLEAN CODE, NO STRESS.',
-    paragraph1: 'I am Prinson Nazareth, a full-stack developer and creative designer specializing in modern web architecture, React, TypeScript, and high-performance user interfaces. Every project follows three simple rules: zero visual noise, lightning-fast performance, and accessible interfaces that fit into real life.',
+    paragraph1: 'I am YOUR NAME, a full-stack developer and creative designer specializing in modern web architecture, React, TypeScript, and high-performance user interfaces. Every project follows three simple rules: zero visual noise, lightning-fast performance, and accessible interfaces that fit into real life.',
     paragraph2: 'The brand balances typographic discipline with soft organic minimalism: two cats represent the studio ethos — one curious (continuous technological exploration), and one calm (rock-solid architectural stability and restful user experiences).',
     role: 'Full-Stack Developer, UI/UX Architect',
     tools: 'React 19, TypeScript, Next.js, Tailwind CSS, Node.js, Cloudflare',
     deliverables: 'Full-Stack Web Applications, Design Token Systems, REST/GraphQL APIs, 100% Responsive UI',
-    liveDisplay: 'github.com/PRN-6',
+    liveDisplay: 'github.com/yourusername',
   },
   branding: {
     tag: 'PHILOSOPHY',
     headline: 'TWO CATS, ONE STUDIO.',
     description: 'A curious cat and a sleepy cat sit side by side under a little star. The violet outline is the playful, curious half exploring emerging tech and creative interactions; the solid black cat is the calm half focused on robust engineering, clean architecture, and restful ergonomics.',
-    badgeName: 'PRINSON NAZARETH',
+    badgeName: 'YOUR NAME',
   },
   designSystem: {
     colors: {
@@ -249,14 +249,14 @@ export const portfolio66Data: PortfolioConfig = {
     {
       id: 'faq-5',
       question: 'HOW CAN WE START A PROJECT TOGETHER?',
-      answer: 'Send me a direct message through the contact form below or email prinsonnazareth2@gmail.com with your project goals or role description.',
+      answer: 'Send me a direct message through the contact form or email yourname@example.com with your project goals or role description.',
     },
   ],
   socials: [
-    { platform: 'GitHub', url: 'https://github.com/PRN-6' },
-    { platform: 'Email', url: 'mailto:prinsonnazareth2@gmail.com' },
-    { platform: 'LinkedIn', url: 'https://linkedin.com/in/prinson-nazareth' },
-    { platform: 'X (Twitter)', url: 'https://x.com/prn_6' },
+    { platform: 'GitHub', url: 'https://github.com/yourusername' },
+    { platform: 'Email', url: 'mailto:yourname@example.com' },
+    { platform: 'LinkedIn', url: 'https://linkedin.com/in/yourusername' },
+    { platform: 'X (Twitter)', url: 'https://x.com/yourusername' },
   ],
 };
 

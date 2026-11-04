@@ -76,8 +76,28 @@ This document tracks all issues encountered during the development, compilation,
      - `FAQ`: Expandable collaboration accordions.
      - `CONTACT`: Say Hello with direct email, GitHub, and interactive form.
   2. Implemented seamless view-switching in `TopNavbar`: clicking any nav tab immediately swaps to that page with zero page reloads or infinite vertical scrolling.
-  3. Added interactive slide controls on the footer: pagination (`01 / 08 · HOME`), slide indicator dots, `← PREV` / `NEXT →` buttons, and keyboard arrow key navigation (`ArrowLeft` / `ArrowRight`).
-  4. Synced navigation with browser URL hash (`#home`, `#projects`, etc.) for seamless history and sharing.
+  3. Synced navigation with browser URL hash (`#home`, `#projects`, etc.) for seamless history and sharing.
+- **Status**: ✅ **RESOLVED & VERIFIED**
+
+---
+
+### Issue 7: Footer Removal, Framer Motion Animations & Universal Name Standardization
+- **Requirement**: The user requested: *"in the bottom of the home page remove that bottm footer like that in every page and add more animations for the page use farmar motion or something and remove the prinson royal nazareth name and add ther your name exact like this"*.
+- **Category**: UI Ergonomics, Motion Design & Template Standardization
+- **Root Cause**:
+  1. Bottom pagination footer occupied vertical screen real estate, conflicting with the desired distraction-free single-screen presentation.
+  2. Page view changes were instantaneous with minimal visual feedback.
+  3. The website still had specific hardcoded personal name strings ("Prinson Royal Nazareth" / "Prinson Nazareth") preventing it from serving as a universal template ready for anyone to use.
+- **Fix Applied**:
+  1. **Bottom Footer Removal**: Completely removed the bottom pagination footer across all pages so each view occupies the full height comfortably without clutter.
+  2. **Framer Motion Animations**:
+     - Integrated `framer-motion`'s `<AnimatePresence mode="wait">` and `<motion.div>` in `App.tsx` for fluid page transitions (`fade`, `y: 12 -> 0`, `scale: 0.995 -> 1`).
+     - Added sliding active pill transition (`layoutId="activeNavPill"`) to the top navbar tabs.
+     - Added floating/breathing idle animations (`y: [0, -8, 0]`) to the cat illustrations in `HeroSection.tsx` and `StudioOverviewSection.tsx`.
+     - Added staggered card entrances and `whileHover` elevation in `ProjectsPage.tsx`, `ArticlesPage.tsx`, and `ColorTypeSystemSection.tsx`.
+     - Added smooth height expanding/collapsing accordion animations with `AnimatePresence` in `FaqPage.tsx`.
+     - Added button micro-interactions (`whileHover={{ scale: 1.05 }}`, `whileTap={{ scale: 0.95 }}`).
+  3. **Universal Name Replacement**: Replaced all occurrences of "Prinson Royal Nazareth" and "Prinson Nazareth" with the exact string **`YOUR NAME`**, handle **`PORTFOLIO66`**, email **`yourname@example.com`**, and repository **`github.com/yourusername`**.
 - **Status**: ✅ **RESOLVED & VERIFIED**
 
 ---
