@@ -51,6 +51,27 @@ npm run build
 
 ---
 
+## ☁️ Deploy to Vercel
+
+This repository is pre-configured with [`vercel.json`](vercel.json) for 1-click deployment on Vercel:
+
+### Option A: From Vercel Dashboard (Recommended)
+1. Go to [vercel.com](https://vercel.com) and log in.
+2. Click **"Add New Project"** → **"Import Git Repository"**.
+3. Select `portfolio66`.
+4. Vercel automatically detects **Vite** framework settings:
+   - **Framework Preset**: `Vite`
+   - **Build Command**: `npm run build`
+   - **Output Directory**: `dist`
+5. Click **"Deploy"**. Your site will be live on a global CDN in under 30 seconds!
+
+### Option B: Deploy via Vercel CLI
+```bash
+npx vercel
+```
+
+---
+
 ## 🎨 Customizing for Yourself
 
 All content and branding can be edited in a single file:

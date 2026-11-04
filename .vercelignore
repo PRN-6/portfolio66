@@ -1,0 +1,5 @@
+# Ignore design assets and local files for faster Vercel deployments
+reference/
+.git
+.gemini
+ISSUE.md
