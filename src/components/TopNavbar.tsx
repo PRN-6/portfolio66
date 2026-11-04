@@ -37,14 +37,14 @@ export const TopNavbar: React.FC<TopNavbarProps> = ({
             {studioName}
           </span>
           <span className="hidden sm:inline-block text-[10px] uppercase font-bold tracking-widest text-[#7B5CFF] bg-[#7B5CFF]/15 px-2.5 py-0.5 rounded-full border border-[#7B5CFF]/30">
-            CREATIVE PORTFOLIO
+            PORTFOLIO66
           </span>
         </a>
 
         {/* Clean Portfolio Navigation Links */}
         <nav className="hidden md:flex items-center gap-7 font-headline text-xs tracking-widest uppercase text-white/70">
           <a href="#studio" className="hover:text-white transition-colors">
-            THE STUDIO
+            ABOUT
           </a>
           <a href="#logo" className="hover:text-white transition-colors">
             IDENTITY
@@ -53,10 +53,10 @@ export const TopNavbar: React.FC<TopNavbarProps> = ({
             SYSTEM
           </a>
           <a href="#works" className="hover:text-white transition-colors">
-            WEBSITE
+            PROJECTS
           </a>
           <a href="#inner-pages" className="hover:text-white transition-colors">
-            INNER PAGES
+            PAGES
           </a>
           <a href="#mobile" className="hover:text-white transition-colors">
             MOBILE

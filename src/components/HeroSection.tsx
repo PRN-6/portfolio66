@@ -40,7 +40,10 @@ export const HeroSection: React.FC<HeroProps> = ({ data }) => {
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
             {/* Massive Anton Title (Matches reference style in Moon Violet #7B5CFF) */}
             <div className="z-10 max-w-2xl">
-              <h1 className="font-headline text-6xl sm:text-8xl md:text-9xl lg:text-[10.5rem] leading-[0.88] text-[#7B5CFF] tracking-tight uppercase select-none drop-shadow-sm">
+              <span className="font-headline tracking-widest text-sm sm:text-base text-white/60 block mb-2">
+                PORTFOLIO66 · CREATIVE STUDIO
+              </span>
+              <h1 className="font-headline text-5xl sm:text-7xl md:text-8xl lg:text-[9.5rem] leading-[0.88] text-[#7B5CFF] tracking-tight uppercase select-none drop-shadow-sm">
                 {data.meta.studioName}
               </h1>
             </div>

@@ -1,23 +1,24 @@
-export interface GameProject {
+export interface PortfolioProject {
   id: string;
   title: string;
   tagline: string;
   category: string;
   status: string;
+  badge: string;
   description: string;
   features: string[];
   themeColor: string;
   bgType: 'violet' | 'cream' | 'night';
-  playUrl?: string;
-  score?: number;
-  badge?: string;
+  githubUrl?: string;
+  liveUrl?: string;
+  metrics?: string;
 }
 
 export interface BlogPost {
   id: string;
   title: string;
   excerpt: string;
-  category: 'PUZZLE TIPS' | 'GAME LISTS' | 'DEVLOG' | 'NEWS';
+  category: 'DEVLOG' | 'UI/UX' | 'TUTORIALS' | 'ESSAYS';
   date: string;
   readTime: string;
   colorScheme: 'violet' | 'night';
@@ -32,6 +33,7 @@ export interface FAQItem {
 export interface PortfolioConfig {
   meta: {
     studioName: string;
+    brandHandle: string;
     projectTitle: string;
     discipline: string;
     year: string;
@@ -39,6 +41,7 @@ export interface PortfolioConfig {
     subTagline: string;
     liveUrl: string;
     contactEmail: string;
+    githubUrl: string;
   };
   overview: {
     tag: string;
@@ -69,7 +72,7 @@ export interface PortfolioConfig {
       wordmark: { font: string; role: string; desc: string };
     };
   };
-  games: GameProject[];
+  projects: PortfolioProject[];
   blogPosts: BlogPost[];
   faq: FAQItem[];
   socials: {
@@ -80,49 +83,51 @@ export interface PortfolioConfig {
 
 export const portfolio66Data: PortfolioConfig = {
   meta: {
-    studioName: 'PORTFOLIO66',
-    projectTitle: 'PORTFOLIO66 | Brand Identity & Website',
-    discipline: 'BRAND IDENTITY · WEBSITE DESIGN · 2026',
+    studioName: 'PRINSON NAZARETH',
+    brandHandle: 'PORTFOLIO66',
+    projectTitle: 'Prinson Nazareth | Portfolio66 — Full-Stack Developer & UI/UX Designer',
+    discipline: 'FULL-STACK DEVELOPER · CREATIVE TECHNOLOGIST · 2026',
     year: '2026',
-    tagline: 'Small games for quiet moments.',
-    subTagline: 'Calm, eye-friendly puzzle games for your commute, your coffee break and your bedtime. Free to play, no timers, no stress.',
-    liveUrl: 'https://portfolio66.com',
-    contactEmail: 'contact@portfolio66.com',
+    tagline: 'Crafting clean code, calm software & intuitive digital experiences.',
+    subTagline: 'Modern full-stack web applications, accessible design systems, and responsive user experiences built with performance, precision, and care.',
+    liveUrl: 'https://github.com/PRN-6/portfolio66',
+    contactEmail: 'prinsonnazareth2@gmail.com',
+    githubUrl: 'https://github.com/PRN-6',
   },
   overview: {
-    tag: 'THE STUDIO',
-    headline: 'CALM PUZZLES, NO STRESS.',
-    paragraph1: 'Portfolio66 is a creative studio making calm puzzle games and thoughtful digital experiences for phones. Every game follows three simple rules: no timers, soft colors that are easy on the eyes, and short sessions that fit into real life.',
-    paragraph2: 'The brand needed to feel friendly and playful without being loud, so two cats became the face of the studio: one curious, one sleepy. The website introduces the games, shares puzzle tips on the blog and collects launch sign ups.',
-    role: 'Brand identity, UI/UX, web development',
-    tools: 'Figma, Astro, Cloudflare, React',
-    deliverables: 'Logo, color & type system, 8 desktop + 8 mobile pages, social images',
-    liveDisplay: 'portfolio66.com',
+    tag: 'THE CREATOR',
+    headline: 'CLEAN CODE, NO STRESS.',
+    paragraph1: 'I am Prinson Nazareth, a full-stack developer and creative designer specializing in modern web architecture, React, TypeScript, and high-performance user interfaces. Every project follows three simple rules: zero visual noise, lightning-fast performance, and accessible interfaces that fit into real life.',
+    paragraph2: 'The brand balances typographic discipline with soft organic minimalism: two cats represent the studio ethos — one curious (continuous technological exploration), and one calm (rock-solid architectural stability and restful user experiences).',
+    role: 'Full-Stack Developer, UI/UX Architect',
+    tools: 'React 19, TypeScript, Next.js, Tailwind CSS, Node.js, Cloudflare',
+    deliverables: 'Full-Stack Web Applications, Design Token Systems, REST/GraphQL APIs, 100% Responsive UI',
+    liveDisplay: 'github.com/PRN-6',
   },
   branding: {
-    tag: 'LOGO',
+    tag: 'PHILOSOPHY',
     headline: 'TWO CATS, ONE STUDIO.',
-    description: 'A curious cat and a sleepy cat sit side by side under a little star. The violet outline is the playful half, the black cat is the calm half. The rounded badge works as an app icon, a favicon and a social avatar.',
-    badgeName: 'PORTFOLIO66',
+    description: 'A curious cat and a sleepy cat sit side by side under a little star. The violet outline is the playful, curious half exploring emerging tech and creative interactions; the solid black cat is the calm half focused on robust engineering, clean architecture, and restful ergonomics.',
+    badgeName: 'PRINSON NAZARETH',
   },
   designSystem: {
     colors: {
       night: {
         name: 'NIGHT',
         hex: '#151515',
-        desc: 'Deep restful dark background for night-time play and readability.',
+        desc: 'Deep restful dark background for night-time work, code reading and visual comfort.',
       },
       cream: {
         name: 'CREAM',
         hex: '#F8F6EF',
-        desc: 'Soft warm paper-like tint that eliminates eye strain.',
+        desc: 'Soft warm paper-like tint that eliminates eye strain and harsh contrast.',
       },
       accent: {
         name: 'MOON VIOLET',
         hex: '#7B5CFF',
-        desc: 'Playful vibrant violet used selectively for titles, CTAs and mascot highlights.',
+        desc: 'Playful vibrant violet used selectively for titles, primary actions and visual highlights.',
       },
-      rationale: 'Night and cream keep long reading calm; violet is used only for what matters: titles, buttons and the playful cat.',
+      rationale: 'Night and cream keep long reading calm; violet is used only for what matters: titles, buttons and interactive focus points.',
     },
     typography: {
       headline: {
@@ -133,7 +138,7 @@ export const portfolio66Data: PortfolioConfig = {
       text: {
         font: 'ROBOTO CONDENSED',
         role: 'TEXT',
-        desc: 'Quiet and readable for body copy and labels.',
+        desc: 'Quiet and readable for body copy, specs, and labels.',
       },
       wordmark: {
         font: 'BALOO 2',
@@ -142,115 +147,117 @@ export const portfolio66Data: PortfolioConfig = {
       },
     },
   },
-  games: [
+  projects: [
     {
-      id: 'blockmoon',
-      title: 'BLOCKMOON',
-      tagline: 'Drag soft glowing blocks onto an 8x8 board under the night sky.',
-      category: 'BLOCK PUZZLE',
-      status: 'CLOSED TEST',
-      badge: 'CLOSED TEST · 2026',
-      description: 'Drag soft glowing blocks onto an 8x8 board under the night sky. Fill rows and columns to clear them, chain combos and chase your best score.',
+      id: 'nexaflow',
+      title: 'NEXAFLOW CLOUD',
+      tagline: 'Real-time telemetry and distributed cloud observability dashboard.',
+      category: 'CLOUD & DISTRIBUTED SYSTEMS',
+      status: 'PRODUCTION READY',
+      badge: 'FULL-STACK · 2026',
+      description: 'A high-throughput cloud observability platform streaming live server metrics, distributed traces, and canvas-based node topologies with sub-50ms latency.',
       features: [
-        'No timers, play at your own pace',
-        'Eye-friendly night design with soft neon glow',
-        'Works 100% offline without wifi',
-        'One extra chance per game with a short optional video'
+        'Real-time WebSocket telemetry with automatic backpressure',
+        'Interactive SVG topology node visualizer',
+        'Zero-dependency client telemetry SDK for React and Node.js',
+        'Dark-mode first dashboard with eye-friendly nocturnal palettes'
       ],
       themeColor: '#7B5CFF',
       bgType: 'violet',
-      score: 1250,
+      githubUrl: 'https://github.com/PRN-6',
+      metrics: '50K+ ops/sec',
     },
     {
-      id: 'moon-arrows',
-      title: 'MOON ARROWS',
-      tagline: 'Every arrow wants out. Tap them in order, unlock and watch the maze unwind.',
-      category: 'ARROW PUZZLE',
-      status: 'IN DEVELOPMENT',
-      badge: 'ARROW PUZZLE · IN DEVELOPMENT',
-      description: 'Every arrow wants out. Tap them in order, unlock and watch the maze unwind into a dance screen on every solve.',
+      id: 'aura-ui',
+      title: 'AURA DESIGN SYSTEM',
+      tagline: 'Headless, accessible design tokens and component engine for modern web apps.',
+      category: 'DESIGN SYSTEM & UI ARCHITECTURE',
+      status: 'OPEN SOURCE',
+      badge: 'DESIGN SYSTEM · 2026',
+      description: 'An ergonomic component suite featuring 40+ WCAG AAA compliant primitives, fluid KaTeX typographic scaling, and zero-runtime CSS variable design tokens.',
       features: [
-        'Handcrafted labyrinth puzzles',
-        'Ambient nocturnal soundscape',
-        'Infinite undo and gentle hints',
-        'Zero intrusive popups or paywalls'
+        'WCAG AAA accessible keyboard navigation & ARIA landmarks',
+        'Automated token synchronization between Figma & Tailwind',
+        'Comprehensive Storybook documentation & interactive testbench',
+        'Under 12kB gzipped core bundle with tree-shaking support'
       ],
       themeColor: '#7B5CFF',
       bgType: 'cream',
-      score: 840,
+      githubUrl: 'https://github.com/PRN-6',
+      metrics: '40+ Components',
     },
   ],
   blogPosts: [
     {
-      id: 'relaxing-puzzle-games',
-      title: '10 RELAXING PUZZLE GAMES TO PLAY BEFORE BED',
-      excerpt: 'Calm, eye-friendly picks with no timers and no stress, perfect for winding down after a busy day.',
-      category: 'GAME LISTS',
-      date: 'Oct 2, 2026',
+      id: 'high-performance-react',
+      title: 'BUILDING HIGH-PERFORMANCE REACT 19 APPS WITH MODERN VITE',
+      excerpt: 'Optimizing render lifecycles, asset preloading, and fine-grained state management for 60fps web apps.',
+      category: 'DEVLOG',
+      date: 'Oct 24, 2026',
+      readTime: '5 min read',
+      colorScheme: 'violet',
+    },
+    {
+      id: 'design-tokens-workflow',
+      title: 'DESIGN TOKENS: BRIDGING THE VOID BETWEEN FIGMA AND TAILWIND',
+      excerpt: 'How to automate single-source-of-truth visual design tokens for consistent multi-platform UI.',
+      category: 'UI/UX',
+      date: 'Oct 12, 2026',
+      readTime: '6 min read',
+      colorScheme: 'night',
+    },
+    {
+      id: 'calm-software-architecture',
+      title: 'THE ARCHITECTURE OF CALM SOFTWARE: REDUCING COGNITIVE LOAD',
+      excerpt: 'Designing digital tools that respect human attention, eliminate notification fatigue, and foster deep focus.',
+      category: 'ESSAYS',
+      date: 'Sep 28, 2026',
       readTime: '4 min read',
       colorScheme: 'violet',
     },
     {
-      id: 'high-score-block-puzzle',
-      title: 'HOW TO GET A HIGH SCORE IN BLOCK PUZZLE GAMES',
-      excerpt: 'Keep the center open, plan for the big pieces and chain your clears for combo points.',
-      category: 'PUZZLE TIPS',
-      date: 'Sep 24, 2026',
-      readTime: '5 min read',
-      colorScheme: 'night',
-    },
-    {
-      id: 'arrow-puzzle-tips',
-      title: 'ARROW PUZZLE TIPS: SOLVE ANY MAZE FASTER',
-      excerpt: 'Start from the edges, look for arrows with a clear path and never tap twice by accident.',
-      category: 'PUZZLE TIPS',
-      date: 'Sep 17, 2026',
-      readTime: '3 min read',
-      colorScheme: 'violet',
-    },
-    {
-      id: 'devlog-first-year',
-      title: 'POSTING OUR JOURNEY: YEAR ONE OF PORTFOLIO66',
-      excerpt: 'From two sleepy shelter cats to building calm mobile games for quiet moments around the globe.',
-      category: 'DEVLOG',
-      date: 'Aug 30, 2026',
-      readTime: '6 min read',
+      id: 'offline-first-pwa',
+      title: 'OFFLINE-FIRST WEB ARCHITECTURE WITH INDEXEDDB AND SERVICE WORKERS',
+      excerpt: 'Practical patterns for resilient local-first data caching, conflict resolution, and background sync.',
+      category: 'TUTORIALS',
+      date: 'Sep 05, 2026',
+      readTime: '7 min read',
       colorScheme: 'night',
     },
   ],
   faq: [
     {
       id: 'faq-1',
-      question: 'ARE YOUR GAMES FREE?',
-      answer: 'Yes. All our games are free to download and play. They are supported by non-intrusive ads that never interrupt your active puzzle sessions.',
+      question: 'WHAT ROLES AND OPPORTUNITIES ARE YOU OPEN TO?',
+      answer: 'I am available for full-time Senior Full-Stack Engineering roles, high-impact contract projects, and design system architecture advisory.',
     },
     {
       id: 'faq-2',
-      question: 'DO I NEED AN INTERNET CONNECTION?',
-      answer: 'No! Our games are specifically designed for flights, commutes, and quiet offline sessions. Progress is saved locally on your device.',
+      question: 'WHAT IS YOUR PRIMARY TECHNOLOGY STACK?',
+      answer: 'My daily stack centers on TypeScript, React 19, Next.js, Tailwind CSS, Node.js, PostgreSQL, and Cloudflare Workers / AWS. I prioritize type safety, clean code, and zero bloat.',
     },
     {
       id: 'faq-3',
-      question: 'WHY DO I SEE ADS?',
-      answer: 'We keep our studio independent through lightweight optional ads (like a voluntary revive or bonus palette unlock) so the games stay 100% free forever.',
+      question: 'CAN YOU COLLABORATE ACROSS DIFFERENT TIME ZONES?',
+      answer: 'Yes! I have extensive experience operating asynchronously with distributed teams across the US, Europe, and Asia-Pacific with daily transparent updates.',
     },
     {
       id: 'faq-4',
-      question: 'MY PROGRESS IS GONE. WHAT CAN I DO?',
-      answer: 'If you connected your Google Play Games account, tap Restore in Settings. You can also reach out to contact@portfolio66.com and we will help recover your saves.',
+      question: 'HOW DO YOU ENSURE CODE QUALITY AND MAINTAINABILITY?',
+      answer: 'Strict TypeScript typing, modular component boundaries, automated CI/CD checks, comprehensive unit/E2E test coverage, and documentation-first engineering.',
     },
     {
       id: 'faq-5',
-      question: 'WHICH DEVICES ARE SUPPORTED?',
-      answer: 'All modern Android phones and tablets running Android 9.0+, with iOS release coming in late 2026.',
+      question: 'HOW CAN WE START A PROJECT TOGETHER?',
+      answer: 'Send me a direct message through the contact form below or email prinsonnazareth2@gmail.com with your project goals or role description.',
     },
   ],
   socials: [
-    { platform: 'Instagram', url: 'https://instagram.com/portfolio66' },
-    { platform: 'TikTok', url: 'https://tiktok.com/@portfolio66' },
-    { platform: 'X (Twitter)', url: 'https://x.com/portfolio66' },
+    { platform: 'GitHub', url: 'https://github.com/PRN-6' },
+    { platform: 'Email', url: 'mailto:prinsonnazareth2@gmail.com' },
+    { platform: 'LinkedIn', url: 'https://linkedin.com/in/prinson-nazareth' },
+    { platform: 'X (Twitter)', url: 'https://x.com/prn_6' },
   ],
 };
 
-// Aliases for compatibility
 export const defaultPortfolioData = portfolio66Data;

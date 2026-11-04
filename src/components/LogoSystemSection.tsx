@@ -66,13 +66,13 @@ export const LogoSystemSection: React.FC<LogoSystemProps> = ({ data }) => {
           </span>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             {/* Variant 1: Cream */}
-            <CatLogoBadge variant="cream" />
+            <CatLogoBadge variant="cream" brandName={data.meta.studioName} />
 
             {/* Variant 2: Violet */}
-            <CatLogoBadge variant="violet" />
+            <CatLogoBadge variant="violet" brandName={data.meta.studioName} />
 
             {/* Variant 3: Dark */}
-            <CatLogoBadge variant="dark" />
+            <CatLogoBadge variant="dark" brandName={data.meta.studioName} />
           </div>
         </div>
       </div>

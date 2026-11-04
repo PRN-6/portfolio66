@@ -1,18 +1,17 @@
 import React, { useState } from 'react';
 import type { PortfolioConfig } from '../portfolioData';
 import { CatLogoBadge } from './illustrations/CatLogoBadge';
-import { BlockmoonPhoneMockup } from './illustrations/BlockmoonPhoneMockup';
-import { MoonArrowsPhoneMockup } from './illustrations/MoonArrowsPhoneMockup';
-import { GooglePlayBadge } from './illustrations/GooglePlayBadge';
+import { NexaFlowDashboardMockup } from './illustrations/NexaFlowDashboardMockup';
+import { AuraUIDesignMockup } from './illustrations/AuraUIDesignMockup';
 import {
   X,
   Plus,
   Minus,
   CheckCircle,
   ExternalLink,
-  ArrowRight,
-  Filter,
+  Code2,
 } from 'lucide-react';
+import { GithubIcon } from './illustrations/GithubIcon';
 import confetti from 'canvas-confetti';
 
 interface PageModalProps {
@@ -32,7 +31,7 @@ export const PageModal: React.FC<PageModalProps> = ({
   const [formState, setFormState] = useState({
     name: '',
     email: '',
-    topic: 'Feedback',
+    topic: 'Project Inquiry',
     message: '',
   });
 
@@ -46,7 +45,7 @@ export const PageModal: React.FC<PageModalProps> = ({
     confetti({ particleCount: 35, spread: 50 });
     setTimeout(() => {
       setContactSent(false);
-      setFormState({ name: '', email: '', topic: 'Feedback', message: '' });
+      setFormState({ name: '', email: '', topic: 'Project Inquiry', message: '' });
     }, 4000);
   };
 
@@ -63,7 +62,7 @@ export const PageModal: React.FC<PageModalProps> = ({
           <div className="flex items-center gap-3">
             <CatLogoBadge size={30} variant="badge-only" />
             <span className="font-headline tracking-wider text-base text-white uppercase">
-              {data.meta.studioName} • {pageId}
+              {data.meta.studioName} • {pageId === 'games' ? 'PROJECTS' : pageId}
             </span>
           </div>
           <button
@@ -76,112 +75,125 @@ export const PageModal: React.FC<PageModalProps> = ({
 
         {/* Modal Scrollable Body */}
         <div className="flex-1 overflow-y-auto">
-          {/* ================= PAGE 1: GAMES ================= */}
+          {/* ================= PAGE 1: PROJECTS ================= */}
           {pageId === 'games' && (
             <div>
               {/* Header Banner */}
               <div className="bg-[#151515] p-6 sm:p-10 border-b border-white/10">
                 <span className="text-xs font-bold tracking-[0.25em] uppercase text-[#7B5CFF] block mb-2">
-                  OUR GAMES
+                  SELECTED WORKS
                 </span>
                 <h3 className="font-headline text-5xl sm:text-6xl text-[#7B5CFF] uppercase">
-                  GAMES
+                  PROJECTS
                 </h3>
                 <p className="font-text text-base text-white/80 mt-2 max-w-lg">
-                  Small, calm puzzle games. Free to play, easy on the eyes. No timers, no intrusive popups, and full offline support.
+                  Full-stack cloud applications, accessible design systems, and responsive modern web architecture.
                 </p>
               </div>
 
-              {/* Games Showcase List */}
+              {/* Projects Showcase List */}
               <div className="bg-[#F8F6EF] text-[#151515] p-6 sm:p-10 space-y-12">
-                {/* Game 1: Blockmoon */}
+                {/* Project 1: NexaFlow */}
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center bg-white p-6 sm:p-8 rounded-3xl border border-[#ded8c4] shadow-sm">
                   <div className="md:col-span-6 space-y-4">
                     <span className="text-[10px] font-bold tracking-widest text-[#7B5CFF] bg-[#7B5CFF]/15 px-3 py-1 rounded-full uppercase">
-                      BLOCK PUZZLE • CLOSED TEST
+                      CLOUD & TELEMETRY • PRODUCTION
                     </span>
                     <h4 className="font-headline text-4xl text-[#151515] uppercase">
-                      BLOCKMOON
+                      NEXAFLOW CLOUD
                     </h4>
                     <p className="font-text text-sm text-[#151515]/80 leading-relaxed">
-                      Drag soft glowing blocks onto an 8x8 board under the night sky. Fill rows and columns to clear them, chain combos and chase your best score.
+                      A high-throughput cloud observability platform streaming live server metrics, distributed traces, and canvas-based node topologies with sub-50ms latency.
                     </p>
                     <ul className="text-xs font-text text-[#151515]/80 space-y-2">
                       <li className="flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#7B5CFF]" /> No timers, play at your own pace
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#7B5CFF]" /> Real-time WebSocket telemetry with backpressure
                       </li>
                       <li className="flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#7B5CFF]" /> Eye-friendly nocturnal aesthetics
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#7B5CFF]" /> Interactive SVG topology node graph visualizer
                       </li>
                       <li className="flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#7B5CFF]" /> Play 100% offline
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#7B5CFF]" /> One extra chance per game with short optional video
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#7B5CFF]" /> 50,000+ operations/second throughput
                       </li>
                     </ul>
                     <div className="pt-2">
-                      <GooglePlayBadge />
+                      <a
+                        href={data.meta.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 bg-black text-white px-5 py-2.5 rounded-xl font-headline text-xs tracking-wider hover:bg-[#7B5CFF] transition-colors"
+                      >
+                        <GithubIcon size={15} />
+                        <span>VIEW ON GITHUB</span>
+                      </a>
                     </div>
                   </div>
                   <div className="md:col-span-6 flex justify-center">
-                    <BlockmoonPhoneMockup interactive={true} />
+                    <NexaFlowDashboardMockup interactive={true} />
                   </div>
                 </div>
 
-                {/* Game 2: Moon Arrows */}
+                {/* Project 2: Aura UI */}
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center bg-white p-6 sm:p-8 rounded-3xl border border-[#ded8c4] shadow-sm">
                   <div className="md:col-span-6 space-y-4">
                     <span className="text-[10px] font-bold tracking-widest text-[#7B5CFF] bg-[#7B5CFF]/15 px-3 py-1 rounded-full uppercase">
-                      ARROW PUZZLE • IN DEVELOPMENT
+                      DESIGN SYSTEM • OPEN SOURCE
                     </span>
                     <h4 className="font-headline text-4xl text-[#151515] uppercase">
-                      MOON ARROWS
+                      AURA DESIGN TOKENS
                     </h4>
                     <p className="font-text text-sm text-[#151515]/80 leading-relaxed">
-                      Every arrow wants out. Tap them in order, unlock and watch the maze unwind into a dance screen on every solve.
+                      An ergonomic component suite featuring 40+ WCAG AAA compliant primitives, fluid typographic scaling, and zero-runtime CSS variable design tokens.
                     </p>
                     <ul className="text-xs font-text text-[#151515]/80 space-y-2">
                       <li className="flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#7B5CFF]" /> Handcrafted maze layouts
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#7B5CFF]" /> 40+ WCAG AAA accessible components
                       </li>
                       <li className="flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#7B5CFF]" /> Ambient nocturnal soundscapes
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#7B5CFF]" /> Single-source token synchronization for Figma & Tailwind
                       </li>
                       <li className="flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#7B5CFF]" /> Infinite undo and quiet hints
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#7B5CFF]" /> Under 12kB gzipped core bundle
                       </li>
                     </ul>
                     <div className="pt-2">
-                      <GooglePlayBadge />
+                      <a
+                        href={data.meta.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 bg-black text-white px-5 py-2.5 rounded-xl font-headline text-xs tracking-wider hover:bg-[#7B5CFF] transition-colors"
+                      >
+                        <Code2 size={15} />
+                        <span>COMPONENT REPO</span>
+                      </a>
                     </div>
                   </div>
                   <div className="md:col-span-6 flex justify-center">
-                    <MoonArrowsPhoneMockup interactive={true} />
+                    <AuraUIDesignMockup />
                   </div>
                 </div>
               </div>
             </div>
           )}
 
-          {/* ================= PAGE 2: BLOG ================= */}
+          {/* ================= PAGE 2: BLOG (ARTICLES) ================= */}
           {pageId === 'blog' && (
             <div>
               {/* Header Banner */}
               <div className="bg-[#151515] p-6 sm:p-10 border-b border-white/10">
                 <span className="text-xs font-bold tracking-[0.25em] uppercase text-[#7B5CFF] block mb-2">
-                  FROM THE STUDIO
+                  ENGINEERING LOGS
                 </span>
                 <h3 className="font-headline text-5xl sm:text-6xl text-[#7B5CFF] uppercase">
-                  BLOG
+                  ARTICLES
                 </h3>
                 <p className="font-text text-base text-white/80 mt-2 max-w-lg mb-6">
-                  Puzzle tips, cozy game lists and notes from our independent studio.
+                  Architecture deep-dives, design systems, and calm software engineering.
                 </p>
 
                 {/* Filter Pills */}
                 <div className="flex flex-wrap items-center gap-2">
-                  {['ALL', 'PUZZLE TIPS', 'GAME LISTS', 'DEVLOG', 'NEWS'].map(
+                  {['ALL', 'DEVLOG', 'UI/UX', 'ESSAYS', 'TUTORIALS'].map(
                     (filter) => (
                       <button
                         key={filter}
@@ -229,7 +241,7 @@ export const PageModal: React.FC<PageModalProps> = ({
                       <span className="font-headline text-[#7B5CFF] tracking-wider uppercase">
                         Read Story →
                       </span>
-                      <span className="text-black/40">Gika Games Studio</span>
+                      <span className="text-black/40">Prinson Nazareth</span>
                     </div>
                   </article>
                 ))}
@@ -243,13 +255,13 @@ export const PageModal: React.FC<PageModalProps> = ({
               {/* Header Banner */}
               <div className="bg-[#151515] p-6 sm:p-10 border-b border-white/10">
                 <span className="text-xs font-bold tracking-[0.25em] uppercase text-[#7B5CFF] block mb-2">
-                  HELP CENTER
+                  COLLABORATION & PROCESS
                 </span>
                 <h3 className="font-headline text-5xl sm:text-6xl text-[#7B5CFF] uppercase">
                   FAQ
                 </h3>
                 <p className="font-text text-base text-white/80 mt-2 max-w-lg">
-                  Quick answers to the questions we get the most about gameplay, offline play, progress saves, and updates.
+                  Answers to common questions regarding technical roles, contracts, timezones, and code quality.
                 </p>
               </div>
 
@@ -289,13 +301,13 @@ export const PageModal: React.FC<PageModalProps> = ({
               {/* Header Banner */}
               <div className="bg-[#151515] p-6 sm:p-10 border-b border-white/10">
                 <span className="text-xs font-bold tracking-[0.25em] uppercase text-[#7B5CFF] block mb-2">
-                  GET IN TOUCH
+                  DIRECT REACH
                 </span>
                 <h3 className="font-headline text-5xl sm:text-6xl text-[#7B5CFF] uppercase">
                   SAY HELLO
                 </h3>
                 <p className="font-text text-base text-white/80 mt-2 max-w-lg">
-                  Feedback, bugs, press or partnerships. We read every message and reply within 30 days.
+                  Available for Senior Full-Stack Engineering roles, design system architecture, and technical consulting.
                 </p>
               </div>
 
@@ -310,7 +322,7 @@ export const PageModal: React.FC<PageModalProps> = ({
                       </span>
                       <a
                         href={`mailto:${data.meta.contactEmail}`}
-                        className="font-headline text-xl sm:text-2xl text-[#151515] hover:text-[#7B5CFF] transition-colors block"
+                        className="font-headline text-xl sm:text-2xl text-[#151515] hover:text-[#7B5CFF] transition-colors block break-all"
                       >
                         {data.meta.contactEmail}
                       </a>
@@ -318,21 +330,24 @@ export const PageModal: React.FC<PageModalProps> = ({
 
                     <div className="pt-2">
                       <span className="text-xs font-bold uppercase tracking-widest text-[#7B5CFF] block mb-2">
-                        SOCIAL CHANNELS
+                        CHANNELS
                       </span>
                       <div className="space-y-1 font-headline text-base text-[#151515]">
-                        <div>Instagram: @gikagames</div>
-                        <div>TikTok: @gikagames</div>
-                        <div>X (Twitter): @gikagames</div>
+                        <a href={data.meta.githubUrl} target="_blank" rel="noopener noreferrer" className="block hover:text-[#7B5CFF]">
+                          GitHub: @PRN-6
+                        </a>
+                        <a href="https://linkedin.com/in/prinson-nazareth" target="_blank" rel="noopener noreferrer" className="block hover:text-[#7B5CFF]">
+                          LinkedIn: /in/prinson-nazareth
+                        </a>
                       </div>
                     </div>
 
                     <div className="p-4 bg-white rounded-2xl border border-[#ded8c4] space-y-1">
                       <span className="font-headline text-xs text-[#151515] uppercase block">
-                        💡 Bug Reporting Tip
+                        ⚡ Fast Response Guarantee
                       </span>
                       <p className="font-text text-xs text-[#151515]/70">
-                        Please include your device model (e.g. Pixel 8, Galaxy S23) and game version so we can debug promptly.
+                        I respond to all genuine project inquiries and technical opportunities within 24 hours.
                       </p>
                     </div>
                   </div>
@@ -346,7 +361,7 @@ export const PageModal: React.FC<PageModalProps> = ({
                           MESSAGE SENT!
                         </h4>
                         <p className="font-text text-sm text-white/70 max-w-sm mx-auto">
-                          Thank you for reaching out. A human from our team will get back to your inbox soon.
+                          Thank you for reaching out. I will reply to your message promptly.
                         </p>
                       </div>
                     ) : (
@@ -394,10 +409,10 @@ export const PageModal: React.FC<PageModalProps> = ({
                             }
                             className="w-full bg-[#202020] text-sm text-white px-4 py-2.5 rounded-xl border border-white/10 focus:border-[#7B5CFF] outline-none cursor-pointer"
                           >
-                            <option value="Feedback">Feedback</option>
-                            <option value="Bug Report">Bug Report</option>
-                            <option value="Press">Press Inquiry</option>
-                            <option value="Partnership">Partnership</option>
+                            <option value="Project Inquiry">Project Inquiry</option>
+                            <option value="Full-Time Role">Full-Time Engineering Role</option>
+                            <option value="Design System Consulting">Design System Consulting</option>
+                            <option value="General Hello">General Hello</option>
                           </select>
                         </div>
 
@@ -412,7 +427,7 @@ export const PageModal: React.FC<PageModalProps> = ({
                             onChange={(e) =>
                               setFormState({ ...formState, message: e.target.value })
                             }
-                            placeholder="Tell us what's on your mind..."
+                            placeholder="Tell me about your project or role..."
                             className="w-full bg-[#202020] text-sm text-white px-4 py-2.5 rounded-xl border border-white/10 focus:border-[#7B5CFF] outline-none resize-none"
                           />
                         </div>

@@ -67,8 +67,6 @@ export const CatLogoBadge: React.FC<CatLogoBadgeProps> = ({
     </div>
   );
 };
-  );
-};
 
 export const CatLogoSVG: React.FC<{ starColor?: string }> = ({
   starColor = '#151515',

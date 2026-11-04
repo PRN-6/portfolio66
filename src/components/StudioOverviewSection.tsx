@@ -84,10 +84,12 @@ export const StudioOverviewSection: React.FC<StudioOverviewProps> = ({ data }) =
           {/* LIVE */}
           <div>
             <span className="block font-text font-bold text-xs tracking-[0.2em] uppercase text-[#7B5CFF] mb-2">
-              LIVE
+              GITHUB
             </span>
             <a
-              href="#works"
+              href="https://github.com/PRN-6"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 font-text text-sm sm:text-base text-[#151515] font-semibold hover:text-[#7B5CFF] transition-colors group cursor-pointer"
             >
               <span className="underline decoration-[#7B5CFF] decoration-2 underline-offset-4">

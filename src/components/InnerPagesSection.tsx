@@ -4,12 +4,11 @@ import type { PortfolioConfig } from '../portfolioData';
 import {
   Plus,
   Minus,
-  Send,
   CheckCircle,
   ExternalLink,
-  ChevronDown,
-  Sparkles,
+  Code2,
 } from 'lucide-react';
+import { GithubIcon } from './illustrations/GithubIcon';
 import confetti from 'canvas-confetti';
 
 interface InnerPagesProps {
@@ -31,7 +30,7 @@ export const InnerPagesSection: React.FC<InnerPagesProps> = ({
   const [contactForm, setContactForm] = useState({
     name: '',
     email: '',
-    topic: 'Feedback',
+    topic: 'Project Inquiry',
     message: '',
   });
   const [contactSent, setContactSent] = useState(false);
@@ -50,7 +49,7 @@ export const InnerPagesSection: React.FC<InnerPagesProps> = ({
 
     setTimeout(() => {
       setContactSent(false);
-      setContactForm({ name: '', email: '', topic: 'Feedback', message: '' });
+      setContactForm({ name: '', email: '', topic: 'Project Inquiry', message: '' });
     }, 4000);
   };
 
@@ -71,20 +70,20 @@ export const InnerPagesSection: React.FC<InnerPagesProps> = ({
             INNER PAGES
           </span>
           <h2 className="font-headline text-5xl sm:text-7xl md:text-8xl leading-none text-white uppercase tracking-tight">
-            GAMES, BLOG, FAQ, CONTACT.
+            PROJECTS, ARTICLES, FAQ, CONTACT.
           </h2>
         </div>
 
         {/* 2x2 Grid of Window Mockups */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10">
-          {/* ================= CARD 1: GAMES PAGE ================= */}
+          {/* ================= CARD 1: PROJECTS PAGE ================= */}
           <div className="bg-[#1b1b1b] rounded-3xl border border-white/10 shadow-2xl overflow-hidden flex flex-col transition-all duration-300 hover:border-[#7B5CFF]/60">
             {/* Dark Top Nav Bar */}
             <div className="bg-[#151515] px-6 py-4 border-b border-white/10 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <CatLogoBadge size={28} variant="badge-only" />
                 <span className="font-headline text-xs tracking-wider text-white">
-                  GIKA GAMES
+                  {data.meta.studioName}
                 </span>
               </div>
               <button
@@ -98,76 +97,74 @@ export const InnerPagesSection: React.FC<InnerPagesProps> = ({
             {/* Dark Header Banner */}
             <div className="bg-[#151515] px-6 py-6 border-b border-white/5">
               <span className="text-[10px] font-bold tracking-widest text-[#7B5CFF] uppercase block mb-1">
-                OUR GAMES
+                FEATURED WORK
               </span>
               <h3 className="font-headline text-3xl sm:text-4xl text-[#7B5CFF] uppercase tracking-wide">
-                GAMES
+                PROJECTS
               </h3>
               <p className="font-text text-xs sm:text-sm text-white/70 mt-1">
-                Small, calm puzzle games. Free to play, easy on the eyes.
+                Full-stack web applications, distributed cloud systems, and design tokens.
               </p>
             </div>
 
             {/* Cream Content Area */}
             <div className="bg-[#F8F6EF] text-[#151515] p-6 flex-1">
-              <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 items-center">
-                {/* Mini Phone Screenshots */}
-                <div className="sm:col-span-5 flex items-center gap-2">
-                  <div className="w-24 h-36 bg-[#0d101d] rounded-xl p-1.5 border border-black/20 shadow-md flex flex-col items-center justify-between">
-                    <span className="text-[7px] text-white/60">🌙</span>
-                    <span className="text-[8px] text-white font-bold">
-                      BLOCKMOON
+              <div className="space-y-4">
+                <div className="bg-white p-4 rounded-2xl border border-[#ded8c4] flex items-center justify-between">
+                  <div>
+                    <span className="text-[9px] font-bold tracking-widest uppercase text-[#7B5CFF] block">
+                      CLOUD & TELEMETRY · 2026
                     </span>
-                    <div className="w-16 h-1.5 bg-[#7B5CFF] rounded-full" />
+                    <h4 className="font-headline text-xl text-[#151515] uppercase tracking-wide">
+                      NEXAFLOW CLOUD OBSERVABILITY
+                    </h4>
+                    <p className="font-text text-xs text-[#151515]/75 mt-0.5">
+                      Real-time WebSocket telemetry streaming 50k+ ops/sec with sub-50ms latency.
+                    </p>
                   </div>
-                  <div className="w-24 h-36 bg-[#09101f] rounded-xl p-1.5 border border-black/20 shadow-md flex flex-col items-center justify-between">
-                    <span className="text-[8px] text-[#FECA57] font-bold">
-                      1250
-                    </span>
-                    <div className="grid grid-cols-4 gap-0.5 w-full">
-                      {Array.from({ length: 12 }).map((_, i) => (
-                        <div
-                          key={i}
-                          className={`h-2 rounded-[1px] ${
-                            i % 2 === 0 ? 'bg-[#7B5CFF]' : 'bg-[#00D2D3]'
-                          }`}
-                        />
-                      ))}
-                    </div>
-                    <div className="w-16 h-1 bg-white/20 rounded-full" />
-                  </div>
+                  <a
+                    href={data.meta.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2.5 rounded-xl bg-black text-white hover:bg-[#7B5CFF] transition-colors ml-4 flex-shrink-0"
+                  >
+                    <GithubIcon size={16} />
+                  </a>
                 </div>
 
-                {/* Game Info */}
-                <div className="sm:col-span-7 space-y-2">
-                  <span className="text-[9px] font-bold tracking-widest uppercase text-black/50 block">
-                    BLOCK PUZZLE • CLOSED TEST · 2026
-                  </span>
-                  <h4 className="font-headline text-2xl text-[#151515] uppercase tracking-wide">
-                    BLOCKMOON
-                  </h4>
-                  <p className="font-text text-xs text-[#151515]/80 leading-relaxed">
-                    Drag soft glowing blocks onto an 8x8 board under the night sky. Fill rows and columns to clear them.
-                  </p>
-                  <ul className="text-[11px] font-text text-[#151515]/70 space-y-1">
-                    <li>• No timers, play at your own pace</li>
-                    <li>• Eye-friendly night design</li>
-                    <li>• Works offline</li>
-                    <li>• One extra chance per game with a short video</li>
-                  </ul>
+                <div className="bg-white p-4 rounded-2xl border border-[#ded8c4] flex items-center justify-between">
+                  <div>
+                    <span className="text-[9px] font-bold tracking-widest uppercase text-[#7B5CFF] block">
+                      DESIGN SYSTEM · 2026
+                    </span>
+                    <h4 className="font-headline text-xl text-[#151515] uppercase tracking-wide">
+                      AURA HEADLESS TOKENS
+                    </h4>
+                    <p className="font-text text-xs text-[#151515]/75 mt-0.5">
+                      40+ WCAG AAA components with automated Figma-to-Tailwind token synchronization.
+                    </p>
+                  </div>
+                  <a
+                    href={data.meta.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2.5 rounded-xl bg-black text-white hover:bg-[#7B5CFF] transition-colors ml-4 flex-shrink-0"
+                  >
+                    <Code2 size={16} />
+                  </a>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* ================= CARD 2: BLOG PAGE ================= */}
+          {/* ================= CARD 2: ARTICLES (BLOG) ================= */}
           <div className="bg-[#1b1b1b] rounded-3xl border border-white/10 shadow-2xl overflow-hidden flex flex-col transition-all duration-300 hover:border-[#7B5CFF]/60">
             {/* Dark Top Nav Bar */}
             <div className="bg-[#151515] px-6 py-4 border-b border-white/10 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <CatLogoBadge size={28} variant="badge-only" />
                 <span className="font-headline text-xs tracking-wider text-white">
-                  GIKA GAMES
+                  {data.meta.studioName}
                 </span>
               </div>
               <button
@@ -181,18 +178,18 @@ export const InnerPagesSection: React.FC<InnerPagesProps> = ({
             {/* Dark Header Banner with Filter Pills */}
             <div className="bg-[#151515] px-6 py-6 border-b border-white/5">
               <span className="text-[10px] font-bold tracking-widest text-[#7B5CFF] uppercase block mb-1">
-                BLOG
+                ENGINEERING LOGS
               </span>
               <h3 className="font-headline text-3xl sm:text-4xl text-[#7B5CFF] uppercase tracking-wide">
-                BLOG
+                ARTICLES
               </h3>
               <p className="font-text text-xs sm:text-sm text-white/70 mt-1 mb-4">
-                Puzzle tips, cozy game lists and notes from our studio.
+                Architecture notes, web performance, and design systems engineering.
               </p>
 
-              {/* Filter Pills (Matches Slide 6: ALL, PUZZLE TIPS, GAME LISTS, DEVLOG, NEWS) */}
+              {/* Filter Pills */}
               <div className="flex flex-wrap items-center gap-1.5">
-                {['ALL', 'PUZZLE TIPS', 'GAME LISTS', 'DEVLOG', 'NEWS'].map((filter) => (
+                {['ALL', 'DEVLOG', 'UI/UX', 'ESSAYS', 'TUTORIALS'].map((filter) => (
                   <button
                     key={filter}
                     onClick={() => setActiveBlogFilter(filter)}
@@ -210,30 +207,29 @@ export const InnerPagesSection: React.FC<InnerPagesProps> = ({
 
             {/* Cream Content Area with Article Cards */}
             <div className="bg-[#F8F6EF] text-[#151515] p-6 flex-1">
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                {filteredBlogPosts.slice(0, 3).map((post, i) => (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {filteredBlogPosts.slice(0, 2).map((post, i) => (
                   <div
                     key={post.id}
                     className="bg-white rounded-xl p-3 border border-[#ded8c4] flex flex-col justify-between shadow-sm hover:border-[#7B5CFF] transition-colors"
                   >
                     <div>
-                      {/* Color Header Banner */}
                       <div
                         className={`w-full h-16 rounded-lg mb-2 flex items-center justify-center text-[9px] font-bold uppercase tracking-wider text-white ${
                           i % 2 === 0 ? 'bg-[#7B5CFF]' : 'bg-[#151515]'
                         }`}
                       >
-                        COVER
+                        {post.category}
                       </div>
                       <span className="text-[8px] font-bold uppercase tracking-widest text-[#7B5CFF] block">
-                        {post.category} • {post.date}
+                        {post.date} · {post.readTime}
                       </span>
                       <h5 className="font-headline text-xs text-[#151515] line-clamp-2 uppercase mt-1 leading-snug">
                         {post.title}
                       </h5>
                     </div>
                     <span className="text-[10px] text-[#7B5CFF] font-bold mt-2 hover:underline">
-                      READ MORE →
+                      READ POST →
                     </span>
                   </div>
                 ))}
@@ -248,7 +244,7 @@ export const InnerPagesSection: React.FC<InnerPagesProps> = ({
               <div className="flex items-center gap-2">
                 <CatLogoBadge size={28} variant="badge-only" />
                 <span className="font-headline text-xs tracking-wider text-white">
-                  GIKA GAMES
+                  {data.meta.studioName}
                 </span>
               </div>
               <button
@@ -262,13 +258,13 @@ export const InnerPagesSection: React.FC<InnerPagesProps> = ({
             {/* Dark Header Banner */}
             <div className="bg-[#151515] px-6 py-6 border-b border-white/5">
               <span className="text-[10px] font-bold tracking-widest text-[#7B5CFF] uppercase block mb-1">
-                HELP
+                HIRING & COLLABORATION
               </span>
               <h3 className="font-headline text-3xl sm:text-4xl text-[#7B5CFF] uppercase tracking-wide">
                 FAQ
               </h3>
               <p className="font-text text-xs sm:text-sm text-white/70 mt-1">
-                Quick answers to the questions we get the most.
+                Common questions regarding engineering roles, tech stack, and workflow.
               </p>
             </div>
 
@@ -308,7 +304,7 @@ export const InnerPagesSection: React.FC<InnerPagesProps> = ({
               <div className="flex items-center gap-2">
                 <CatLogoBadge size={28} variant="badge-only" />
                 <span className="font-headline text-xs tracking-wider text-white">
-                  GIKA GAMES
+                  {data.meta.studioName}
                 </span>
               </div>
               <button
@@ -322,13 +318,13 @@ export const InnerPagesSection: React.FC<InnerPagesProps> = ({
             {/* Dark Header Banner */}
             <div className="bg-[#151515] px-6 py-6 border-b border-white/5">
               <span className="text-[10px] font-bold tracking-widest text-[#7B5CFF] uppercase block mb-1">
-                CONTACT
+                CONTACT DIRECTLY
               </span>
               <h3 className="font-headline text-3xl sm:text-4xl text-[#7B5CFF] uppercase tracking-wide">
                 SAY HELLO
               </h3>
               <p className="font-text text-xs sm:text-sm text-white/70 mt-1">
-                Feedback, bugs, press or partnerships. We read every message and reply within 30 days.
+                Open for full-time senior engineering, design systems, and consulting.
               </p>
             </div>
 
@@ -342,27 +338,24 @@ export const InnerPagesSection: React.FC<InnerPagesProps> = ({
                   </span>
                   <a
                     href={`mailto:${data.meta.contactEmail}`}
-                    className="font-headline text-sm sm:text-base text-[#151515] hover:text-[#7B5CFF] block transition-colors"
+                    className="font-headline text-sm sm:text-base text-[#151515] hover:text-[#7B5CFF] block transition-colors break-all"
                   >
                     {data.meta.contactEmail}
                   </a>
 
                   <div className="pt-2">
                     <span className="text-[10px] uppercase tracking-widest text-[#7B5CFF] font-bold block mb-1">
-                      FOLLOW US
+                      GITHUB & SOCIALS
                     </span>
-                    <div className="flex items-center gap-2 font-medium">
-                      <span>Instagram</span>
-                      <span>•</span>
-                      <span>TikTok</span>
-                      <span>•</span>
-                      <span>X</span>
+                    <div className="flex flex-col gap-1 font-headline text-xs text-[#151515]">
+                      <a href={data.meta.githubUrl} target="_blank" rel="noopener noreferrer" className="hover:text-[#7B5CFF]">
+                        GitHub: @PRN-6
+                      </a>
+                      <a href={data.meta.contactEmail} className="hover:text-[#7B5CFF]">
+                        Email: prinsonnazareth2@gmail.com
+                      </a>
                     </div>
                   </div>
-
-                  <p className="text-[10px] text-[#151515]/60 pt-2 italic">
-                    Bug report tip: add your device model and a screenshot.
-                  </p>
                 </div>
 
                 {/* Right Form Card (Dark in reference) */}
@@ -374,7 +367,7 @@ export const InnerPagesSection: React.FC<InnerPagesProps> = ({
                         MESSAGE DELIVERED!
                       </h5>
                       <p className="font-text text-xs text-white/70">
-                        Thank you! We'll read your note and get back to you.
+                        Thank you! I'll read your note and get back to you promptly.
                       </p>
                     </div>
                   ) : (
@@ -406,21 +399,6 @@ export const InnerPagesSection: React.FC<InnerPagesProps> = ({
                       </div>
 
                       <div>
-                        <select
-                          value={contactForm.topic}
-                          onChange={(e) =>
-                            setContactForm({ ...contactForm, topic: e.target.value })
-                          }
-                          className="w-full bg-[#202020] text-xs text-white px-3 py-1.5 rounded-lg border border-white/10 focus:border-[#7B5CFF] outline-none cursor-pointer"
-                        >
-                          <option value="Feedback">Feedback</option>
-                          <option value="Bug Report">Bug Report</option>
-                          <option value="Press">Press Inquiry</option>
-                          <option value="Partnership">Partnership</option>
-                        </select>
-                      </div>
-
-                      <div>
                         <textarea
                           rows={2}
                           required
@@ -428,7 +406,7 @@ export const InnerPagesSection: React.FC<InnerPagesProps> = ({
                           onChange={(e) =>
                             setContactForm({ ...contactForm, message: e.target.value })
                           }
-                          placeholder="Tell us what happened or what you'd like to see..."
+                          placeholder="Project details or question..."
                           className="w-full bg-[#202020] text-xs text-white px-3 py-1.5 rounded-lg border border-white/10 focus:border-[#7B5CFF] outline-none resize-none"
                         />
                       </div>
