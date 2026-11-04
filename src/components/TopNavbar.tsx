@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CatLogoBadge } from './illustrations/CatLogoBadge';
-import { Menu, X, ArrowUpRight } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { Menu, X, ArrowUpRight, Sparkles } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export type NavPageId =
   | 'home'
@@ -37,13 +37,36 @@ export const TopNavbar: React.FC<TopNavbarProps> = ({
     { id: 'contact', label: 'CONTACT', num: '08' },
   ];
 
+  // Prevent background scrolling when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
+
+  // Close on Escape key
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && mobileMenuOpen) {
+        setMobileMenuOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [mobileMenuOpen]);
+
   const handleNavClick = (id: NavPageId) => {
     onSelectPage(id);
     setMobileMenuOpen(false);
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-[#151515]/95 backdrop-blur-md border-b border-[#252525] py-3 px-4 sm:px-8">
+    <header className="sticky top-0 z-40 w-full bg-[#151515]/95 backdrop-blur-md border-b border-[#252525] py-3 px-4 sm:px-8">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Brand / Logo */}
         <motion.button
@@ -88,7 +111,7 @@ export const TopNavbar: React.FC<TopNavbarProps> = ({
           })}
         </nav>
 
-        {/* Right CTA */}
+        {/* Right CTA (Desktop & Tablet) */}
         <div className="hidden sm:flex items-center gap-3">
           <motion.button
             whileHover={{ scale: 1.05 }}
@@ -107,56 +130,97 @@ export const TopNavbar: React.FC<TopNavbarProps> = ({
 
         {/* Mobile Hamburger Button */}
         <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="lg:hidden text-white p-2 hover:bg-white/10 rounded-xl transition-colors cursor-pointer"
-          aria-label="Toggle menu"
+          type="button"
+          onClick={() => setMobileMenuOpen(true)}
+          className="lg:hidden text-white p-2.5 hover:bg-white/10 rounded-xl transition-colors cursor-pointer flex items-center justify-center active:scale-95"
+          aria-label="Open navigation menu"
         >
-          {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          <Menu size={24} />
         </button>
       </div>
 
-      {/* Mobile Fullscreen Navigation Overlay */}
-      {mobileMenuOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -10 }}
-          className="fixed inset-0 top-[65px] z-50 bg-[#151515] p-6 flex flex-col justify-between lg:hidden overflow-y-auto"
-        >
-          <div className="space-y-2 pt-2">
-            {navLinks.map((link) => (
+      {/* Robust Fullscreen Mobile Navigation Drawer with AnimatePresence */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-[100] bg-[#151515] flex flex-col justify-between p-5 sm:p-8 lg:hidden"
+          >
+            {/* Drawer Top Header (Logo + Explicit Close Button) */}
+            <div className="flex items-center justify-between pb-4 border-b border-white/10">
               <button
-                key={link.id}
-                onClick={() => handleNavClick(link.id)}
-                className={`w-full flex items-baseline gap-3 text-left py-2.5 px-3 rounded-2xl transition-all ${
-                  activePage === link.id
-                    ? 'bg-[#7B5CFF]/20 text-[#7B5CFF] border border-[#7B5CFF]/40'
-                    : 'text-white/80 hover:text-white hover:bg-white/5'
-                }`}
+                onClick={() => handleNavClick('home')}
+                className="flex items-center gap-2.5 text-left cursor-pointer"
               >
-                <span className="font-mono text-xs font-bold opacity-60">
-                  {link.num}
-                </span>
-                <span className="font-headline text-3xl tracking-wide uppercase">
-                  {link.label}
+                <CatLogoBadge size={32} variant="badge-only" />
+                <span className="font-headline tracking-wider text-lg text-white">
+                  {studioName}
                 </span>
               </button>
-            ))}
-          </div>
 
-          <div className="pt-6 border-t border-white/10 space-y-3 pb-6">
-            <button
-              onClick={() => handleNavClick('contact')}
-              className="w-full bg-[#7B5CFF] text-white text-center py-3 rounded-full font-headline tracking-widest text-sm shadow-xl"
-            >
-              GET IN TOUCH
-            </button>
-            <div className="text-center text-xs text-white/50">
-              {studioName} · PORTFOLIO66
+              <button
+                type="button"
+                onClick={() => setMobileMenuOpen(false)}
+                className="p-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer active:scale-95"
+                aria-label="Close navigation menu"
+              >
+                <X size={22} />
+              </button>
             </div>
-          </div>
-        </motion.div>
-      )}
+
+            {/* Middle: Scrollable Navigation Links */}
+            <div className="flex-1 overflow-y-auto py-4 space-y-1">
+              {navLinks.map((link) => {
+                const isActive = activePage === link.id;
+                return (
+                  <button
+                    key={link.id}
+                    onClick={() => handleNavClick(link.id)}
+                    className={`w-full flex items-center justify-between text-left py-3 px-4 rounded-2xl transition-all cursor-pointer ${
+                      isActive
+                        ? 'bg-[#7B5CFF]/20 text-white border border-[#7B5CFF]/40'
+                        : 'text-white/75 hover:text-white hover:bg-white/5'
+                    }`}
+                  >
+                    <div className="flex items-baseline gap-3">
+                      <span className="font-mono text-xs font-bold text-[#7B5CFF]">
+                        {link.num}
+                      </span>
+                      <span className="font-headline text-2xl sm:text-3xl tracking-wide uppercase">
+                        {link.label}
+                      </span>
+                    </div>
+
+                    {isActive && (
+                      <span className="text-[10px] font-headline tracking-widest uppercase bg-[#7B5CFF] text-white px-2.5 py-0.5 rounded-full">
+                        ACTIVE
+                      </span>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Bottom Actions & Studio Footer */}
+            <div className="pt-4 border-t border-white/10 space-y-3">
+              <button
+                onClick={() => handleNavClick('contact')}
+                className="w-full bg-[#7B5CFF] hover:bg-[#6846ed] text-white text-center py-3.5 rounded-full font-headline tracking-widest text-sm shadow-xl active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer"
+              >
+                <span>GET IN TOUCH</span>
+                <ArrowUpRight size={16} />
+              </button>
+
+              <div className="text-center text-xs text-white/40 font-mono">
+                {studioName} · PORTFOLIO66 · 2026
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 };
