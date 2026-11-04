@@ -78,8 +78,8 @@ export function App() {
         onSelectPage={(page) => setActivePage(page)}
       />
 
-      {/* Main Single Page View Container with Framer Motion transitions (No bottom footer bar) */}
-      <main className="flex-1 flex flex-col relative w-full overflow-hidden">
+      {/* Main Single Page View Container with Framer Motion transitions (Responsive scrollable container) */}
+      <main className="flex-1 flex flex-col relative w-full overflow-y-auto overflow-x-hidden">
         <AnimatePresence mode="wait">
           <motion.div
             key={activePage}
@@ -87,7 +87,7 @@ export function App() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -12, scale: 0.995 }}
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="w-full flex-1 flex flex-col justify-center"
+            className="w-full min-h-full flex-1 flex flex-col justify-center"
           >
             {activePage === 'home' && (
               <HeroSection

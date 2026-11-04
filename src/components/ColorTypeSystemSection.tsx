@@ -45,9 +45,9 @@ export const ColorTypeSystemSection: React.FC<ColorTypeSystemProps> = ({ data })
   ];
 
   return (
-    <section className="relative w-full min-h-[calc(100vh-80px)] bg-[#F8F6EF] text-[#151515] py-6 sm:py-8 px-4 sm:px-8 flex flex-col justify-between">
+    <section className="relative w-full min-h-[calc(100vh-70px)] bg-[#F8F6EF] text-[#151515] py-5 sm:py-8 md:py-10 px-4 sm:px-6 md:px-8 flex flex-col justify-between">
       <div className="max-w-7xl mx-auto w-full flex-1 flex flex-col justify-between">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 my-auto py-2">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-14 my-auto py-2">
           {/* ================= LEFT COLUMN: COLOR ================= */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -57,38 +57,38 @@ export const ColorTypeSystemSection: React.FC<ColorTypeSystemProps> = ({ data })
           >
             <div>
               {/* Moon Violet Tag */}
-              <span className="font-text font-bold text-xs sm:text-sm tracking-[0.25em] uppercase text-[#7B5CFF] block mb-4">
+              <span className="font-text font-bold text-xs sm:text-sm tracking-[0.2em] sm:tracking-[0.25em] uppercase text-[#7B5CFF] block mb-3 sm:mb-4">
                 COLOR TOKENS
               </span>
 
-              {/* 3 Large Swatch Cards */}
-              <div className="grid grid-cols-3 gap-3 sm:gap-4 mb-4">
+              {/* 3 Swatch Cards (Side by side on all devices with fluid heights) */}
+              <div className="grid grid-cols-3 gap-2.5 sm:gap-4 mb-4">
                 {colors.map((c) => (
                   <motion.div
                     key={c.key}
-                    whileHover={{ y: -8, scale: 1.02 }}
+                    whileHover={{ y: -6, scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={() => copyToClipboard(c.hex)}
                     title="Click to copy HEX code"
-                    className={`relative h-56 sm:h-72 rounded-2xl sm:rounded-3xl p-4 flex flex-col justify-end shadow-md transition-shadow hover:shadow-xl cursor-pointer border ${c.cardBg} ${c.textColor} ${c.border}`}
+                    className={`relative h-40 sm:h-56 md:h-64 lg:h-72 rounded-2xl sm:rounded-3xl p-3 sm:p-4 flex flex-col justify-end shadow-md transition-shadow hover:shadow-xl cursor-pointer border ${c.cardBg} ${c.textColor} ${c.border}`}
                   >
                     {/* Copy Icon on hover */}
-                    <div className="absolute top-4 right-4 opacity-70 hover:opacity-100 transition-opacity">
+                    <div className="absolute top-2.5 right-2.5 sm:top-4 sm:right-4 opacity-75 hover:opacity-100 transition-opacity">
                       {copiedHex === c.hex ? (
-                        <span className="flex items-center gap-1 text-[10px] font-bold bg-white/20 backdrop-blur-sm px-2 py-0.5 rounded-full">
-                          <Check size={12} /> Copied
+                        <span className="flex items-center gap-1 text-[9px] sm:text-[10px] font-bold bg-white/20 backdrop-blur-sm px-1.5 sm:px-2 py-0.5 rounded-full">
+                          <Check size={11} /> <span className="hidden sm:inline">Copied</span>
                         </span>
                       ) : (
-                        <Copy size={15} />
+                        <Copy size={14} className="sm:w-[15px] sm:h-[15px]" />
                       )}
                     </div>
 
                     {/* Name & Hex */}
                     <div>
-                      <span className="block font-headline tracking-wider text-base sm:text-xl uppercase">
+                      <span className="block font-headline tracking-wider text-xs sm:text-base md:text-xl uppercase leading-tight">
                         {c.name}
                       </span>
-                      <span className="block font-mono text-xs sm:text-sm opacity-80 uppercase tracking-wider font-semibold">
+                      <span className="block font-mono text-[10px] sm:text-xs md:text-sm opacity-80 uppercase tracking-wider font-semibold mt-0.5">
                         {c.hex}
                       </span>
                     </div>
@@ -97,7 +97,7 @@ export const ColorTypeSystemSection: React.FC<ColorTypeSystemProps> = ({ data })
               </div>
 
               {/* Rationale Copy */}
-              <p className="font-text text-sm sm:text-base text-[#151515]/80 leading-relaxed">
+              <p className="font-text text-xs sm:text-sm md:text-base text-[#151515]/80 leading-relaxed">
                 {data.designSystem.colors.rationale}
               </p>
             </div>
@@ -108,80 +108,77 @@ export const ColorTypeSystemSection: React.FC<ColorTypeSystemProps> = ({ data })
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="lg:col-span-6 space-y-6"
+            className="lg:col-span-6 space-y-4 sm:space-y-6"
           >
             <div>
               {/* Moon Violet Tag */}
-              <span className="font-text font-bold text-xs sm:text-sm tracking-[0.25em] uppercase text-[#7B5CFF] block mb-4">
+              <span className="font-text font-bold text-xs sm:text-sm tracking-[0.2em] sm:tracking-[0.25em] uppercase text-[#7B5CFF] block mb-3 sm:mb-4">
                 TYPOGRAPHIC SPECIMEN
               </span>
 
               {/* Typeface 1: Anton (Headlines) */}
-              <div className="flex items-baseline gap-6 pb-4 border-b border-[#ded8c4]">
-                <span className="font-headline text-5xl sm:text-7xl text-[#151515] leading-none select-none w-24 sm:w-28 flex-shrink-0">
+              <div className="flex items-baseline gap-3 sm:gap-6 pb-3 sm:pb-4 border-b border-[#ded8c4]">
+                <span className="font-headline text-4xl sm:text-6xl md:text-7xl text-[#151515] leading-none select-none w-14 sm:w-20 md:w-28 flex-shrink-0">
                   Aa
                 </span>
-                <div>
-                  <h4 className="font-text font-bold text-xs sm:text-sm tracking-[0.2em] text-[#151515] uppercase mb-0.5">
-                    {data.designSystem.typography.headline.font} •{' '}
-                    {data.designSystem.typography.headline.role}
+                <div className="flex-1 min-w-0">
+                  <h4 className="font-text font-bold text-[11px] sm:text-xs md:text-sm tracking-[0.15em] text-[#151515] uppercase mb-0.5">
+                    {data.designSystem.typography.headline.font} • {data.designSystem.typography.headline.role}
                   </h4>
-                  <p className="font-text text-xs sm:text-sm text-[#151515]/75">
+                  <p className="font-text text-xs sm:text-sm text-[#151515]/75 line-clamp-2">
                     {data.designSystem.typography.headline.desc}
                   </p>
-                  <p className="font-headline text-lg sm:text-xl text-[#151515] mt-1 tracking-wide uppercase">
+                  <p className="font-headline text-base sm:text-lg md:text-xl text-[#151515] mt-1 tracking-wide uppercase break-words">
                     {testText}
                   </p>
                 </div>
               </div>
 
               {/* Typeface 2: Roboto Condensed (Text) */}
-              <div className="flex items-baseline gap-6 py-4 border-b border-[#ded8c4]">
-                <span className="font-text font-normal text-5xl sm:text-7xl text-[#151515] leading-none select-none w-24 sm:w-28 flex-shrink-0">
+              <div className="flex items-baseline gap-3 sm:gap-6 py-3 sm:py-4 border-b border-[#ded8c4]">
+                <span className="font-text font-normal text-4xl sm:text-6xl md:text-7xl text-[#151515] leading-none select-none w-14 sm:w-20 md:w-28 flex-shrink-0">
                   Aa
                 </span>
-                <div>
-                  <h4 className="font-text font-bold text-xs sm:text-sm tracking-[0.2em] text-[#151515] uppercase mb-0.5">
-                    {data.designSystem.typography.text.font} •{' '}
-                    {data.designSystem.typography.text.role}
+                <div className="flex-1 min-w-0">
+                  <h4 className="font-text font-bold text-[11px] sm:text-xs md:text-sm tracking-[0.15em] text-[#151515] uppercase mb-0.5">
+                    {data.designSystem.typography.text.font} • {data.designSystem.typography.text.role}
                   </h4>
-                  <p className="font-text text-xs sm:text-sm text-[#151515]/75">
+                  <p className="font-text text-xs sm:text-sm text-[#151515]/75 line-clamp-2">
                     {data.designSystem.typography.text.desc}
                   </p>
-                  <p className="font-text text-sm sm:text-base text-[#151515] mt-1">
+                  <p className="font-text text-xs sm:text-sm md:text-base text-[#151515] mt-1 break-words">
                     {testText}
                   </p>
                 </div>
               </div>
 
               {/* Typeface 3: Baloo 2 (Wordmark) */}
-              <div className="flex items-baseline gap-6 pt-4">
-                <span className="font-wordmark font-bold text-5xl sm:text-7xl text-[#7B5CFF] leading-none select-none w-24 sm:w-28 flex-shrink-0">
+              <div className="flex items-baseline gap-3 sm:gap-6 pt-3 sm:pt-4">
+                <span className="font-wordmark font-bold text-4xl sm:text-6xl md:text-7xl text-[#7B5CFF] leading-none select-none w-14 sm:w-20 md:w-28 flex-shrink-0">
                   Aa
                 </span>
-                <div>
-                  <h4 className="font-text font-bold text-xs sm:text-sm tracking-[0.2em] text-[#7B5CFF] uppercase mb-0.5">
-                    {data.designSystem.typography.wordmark.font} •{' '}
-                    {data.designSystem.typography.wordmark.role}
+                <div className="flex-1 min-w-0">
+                  <h4 className="font-text font-bold text-[11px] sm:text-xs md:text-sm tracking-[0.15em] text-[#7B5CFF] uppercase mb-0.5">
+                    {data.designSystem.typography.wordmark.font} • {data.designSystem.typography.wordmark.role}
                   </h4>
-                  <p className="font-text text-xs sm:text-sm text-[#151515]/75">
+                  <p className="font-text text-xs sm:text-sm text-[#151515]/75 line-clamp-2">
                     {data.designSystem.typography.wordmark.desc}
                   </p>
-                  <p className="font-wordmark font-bold text-lg sm:text-xl text-[#7B5CFF] mt-1">
+                  <p className="font-wordmark font-bold text-base sm:text-lg md:text-xl text-[#7B5CFF] mt-1 break-words">
                     {testText}
                   </p>
                 </div>
               </div>
 
               {/* Font live tester input */}
-              <div className="mt-5 pt-3 flex items-center gap-3 bg-white p-3 rounded-xl border border-[#ded8c4] shadow-sm">
+              <div className="mt-4 pt-2 sm:mt-5 sm:pt-3 flex items-center gap-2.5 bg-white p-2.5 sm:p-3 rounded-xl border border-[#ded8c4] shadow-sm">
                 <Type size={16} className="text-[#7B5CFF] flex-shrink-0" />
                 <input
                   type="text"
                   value={testText}
                   onChange={(e) => setTestText(e.target.value)}
                   placeholder="Test the typography live..."
-                  className="bg-transparent border-none outline-none font-text text-sm w-full text-[#151515]"
+                  className="bg-transparent border-none outline-none font-text text-xs sm:text-sm w-full text-[#151515]"
                 />
               </div>
             </div>

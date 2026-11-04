@@ -34,13 +34,13 @@ export const CatLogoBadge: React.FC<CatLogoBadgeProps> = ({
 
     return (
       <div
-        className={`flex flex-col items-center justify-center p-6 sm:p-8 rounded-2xl shadow-lg transition-transform duration-300 hover:scale-[1.03] ${cardBg} ${className}`}
+        className={`flex flex-col items-center justify-center p-3 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl shadow-lg transition-transform duration-300 hover:scale-[1.03] ${cardBg} ${className}`}
       >
-        <div className="w-16 h-16 sm:w-20 sm:h-20 bg-white rounded-2xl p-2.5 shadow-sm flex items-center justify-center">
+        <div className="w-12 h-12 sm:w-16 sm:h-20 bg-white rounded-xl sm:rounded-2xl p-2 sm:p-2.5 shadow-sm flex items-center justify-center">
           <CatLogoSVG />
         </div>
         <span
-          className={`mt-4 font-headline tracking-wider text-base sm:text-lg ${textClr}`}
+          className={`mt-2 sm:mt-4 font-headline tracking-wider text-xs sm:text-base md:text-lg text-center ${textClr}`}
         >
           {brandName}
         </span>

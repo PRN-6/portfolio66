@@ -29,7 +29,7 @@ export const ArticlesPage: React.FC<ArticlesPageProps> = ({ data }) => {
               <span className="font-text font-bold text-xs sm:text-sm tracking-[0.25em] uppercase text-[#7B5CFF] block mb-1">
                 DEVLOG & ESSAYS
               </span>
-              <h2 className="font-headline text-5xl sm:text-7xl md:text-8xl leading-none text-white uppercase tracking-tight">
+              <h2 className="font-headline text-4xl sm:text-6xl md:text-7xl lg:text-8xl leading-none text-white uppercase tracking-tight break-words">
                 ARTICLES.
               </h2>
             </motion.div>

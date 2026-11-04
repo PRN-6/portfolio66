@@ -26,7 +26,7 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({ data, onNavigate }) 
             <span className="font-text font-bold text-xs sm:text-sm tracking-[0.25em] uppercase text-white/80 block mb-1">
               ENGINEERING PORTFOLIO
             </span>
-            <h2 className="font-headline text-5xl sm:text-7xl md:text-8xl leading-none text-white uppercase tracking-tight">
+            <h2 className="font-headline text-4xl sm:text-6xl md:text-7xl lg:text-8xl leading-none text-white uppercase tracking-tight break-words">
               FEATURED WORKS.
             </h2>
           </div>

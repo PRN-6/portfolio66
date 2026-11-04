@@ -47,7 +47,7 @@ export const HeroSection: React.FC<HeroProps> = ({ data, onNavigate }) => {
               <span className="font-headline tracking-widest text-sm sm:text-base text-white/60 block mb-2">
                 PORTFOLIO66 · CREATIVE STUDIO
               </span>
-              <h1 className="font-headline text-6xl sm:text-8xl md:text-9xl lg:text-[10rem] leading-[0.88] text-[#7B5CFF] tracking-tight uppercase select-none drop-shadow-sm">
+              <h1 className="font-headline text-5xl sm:text-7xl md:text-9xl lg:text-[10rem] leading-[0.88] text-[#7B5CFF] tracking-tight uppercase select-none drop-shadow-sm break-words">
                 {data.meta.studioName}
               </h1>
             </motion.div>
