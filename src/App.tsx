@@ -69,6 +69,11 @@ export function App() {
 
   const currentIndex = PAGE_ORDER.indexOf(activePage);
 
+  const isLocalhost =
+    typeof window !== 'undefined' &&
+    (window.location.hostname === 'localhost' ||
+      window.location.hostname === '127.0.0.1');
+
   return (
     <div className="min-h-screen bg-[#151515] text-[#F8F6EF] font-text flex flex-col selection:bg-[#7B5CFF] selection:text-white overflow-x-hidden">
       {/* Top Navigation Bar: Seamless single-screen view switching */}
@@ -135,6 +140,22 @@ export function App() {
           </motion.div>
         </AnimatePresence>
       </main>
+
+      {/* Dev Mode Floating CMS Shortcut (Only visible on localhost) */}
+      {isLocalhost && (
+        <aside className="fixed bottom-4 right-4 z-50">
+          <a
+            href="http://localhost:3333"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Open Visual CMS Editor (Runs in terminal: npm run cms)"
+            className="group flex items-center gap-2 bg-[#1a1a1a]/95 hover:bg-[#7B5CFF] text-white/80 hover:text-white px-3.5 py-2 rounded-full border border-white/20 shadow-2xl backdrop-blur-md text-xs font-headline tracking-wider uppercase transition-all hover:scale-105"
+          >
+            <span className="w-2 h-2 rounded-full bg-emerald-400 group-hover:bg-white animate-pulse" />
+            <span>Customize Portfolio (CMS)</span>
+          </a>
+        </aside>
+      )}
     </div>
   );
 }

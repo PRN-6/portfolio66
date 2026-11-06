@@ -12,6 +12,7 @@ export interface PortfolioProject {
   githubUrl?: string;
   liveUrl?: string;
   metrics?: string;
+  imageUrl?: string;
 }
 
 export interface BlogPost {

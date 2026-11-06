@@ -164,6 +164,32 @@ This document tracks all issues encountered during the development, compilation,
 
 ---
 
+### Issue 11: Localhost Visual CMS Studio, Photo Upload Engine & Reference Cleanup
+- **Requirement**: The user requested: *"make a development page this is only when we clone and run in the local host we run the website in other terminal we run this development page where there will be multiple fields for the protfolio page were they can type to change and in the website and in the code it changes they can add pic also in the project section they can upload pic and edit every thing... write details in the readme.md and remove the reference folder"*.
+- **Category**: Developer Ergonomics, Content Management & Asset Hygiene
+- **Root Cause**:
+  1. Users cloning the repository who do not know TypeScript/React had to manually search through code files (`src/portfolioData.ts`) to edit text, bios, projects, and links.
+  2. Adding project screenshots required manually moving image files into `public/` and editing image paths in source code.
+  3. Legacy reference slide images in `reference/` and `public/reference/` were taking up disk space and were no longer needed.
+- **Fix Applied**:
+  1. **Visual CMS Server (`scripts/cms-server.mjs`)**:
+     - Built a standalone, zero-dependency Node.js CMS server (`npm run cms`) running on `http://localhost:3333`.
+     - Provides an intuitive visual UI for editing Name, Tagline, Bio, Projects, Articles, FAQs, and Socials.
+     - Saves changes directly into `src/portfolioData.ts` with typed TypeScript code generation, creating automatic backups in `.backups/`.
+     - Triggers instant Vite HMR hot-reloading on `http://localhost:5173`.
+  2. **Project Photo Upload System**:
+     - Integrated base64 file upload in the CMS project cards (`/api/upload`).
+     - Uploads images to `public/uploads/` and links them to the project's `imageUrl`.
+     - Updated `ProjectsPage.tsx` to dynamically render `data.projects` and display uploaded screenshots.
+  3. **Local Dev Shortcut**:
+     - Added a floating `"⚙️ Customize Portfolio (CMS)"` badge on `localhost` that links directly to `http://localhost:3333`.
+  4. **Reference Cleanup & Documentation**:
+     - Removed `reference/` and `public/reference/` folders.
+     - Extensively documented the two-terminal setup (`npm run dev` + `npm run cms`) in `README.md`.
+- **Status**: ✅ **RESOLVED & VERIFIED**
+
+---
+
 ## 🔍 Continuous Diagnostics & Quality Checks
 
 - **TypeScript Compilation (`tsc -b`)**: Passing with 0 errors.

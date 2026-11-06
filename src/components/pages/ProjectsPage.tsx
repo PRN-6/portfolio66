@@ -1,9 +1,9 @@
 import React from 'react';
-import type { PortfolioConfig } from '../../portfolioData';
+import type { PortfolioConfig, PortfolioProject } from '../../portfolioData';
 import { NexaFlowDashboardMockup } from '../illustrations/NexaFlowDashboardMockup';
 import { AuraUIDesignMockup } from '../illustrations/AuraUIDesignMockup';
 import { GithubIcon } from '../illustrations/GithubIcon';
-import { ArrowRight, Code2 } from 'lucide-react';
+import { ArrowRight, Code2, ExternalLink } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 interface ProjectsPageProps {
@@ -33,100 +33,143 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({ data, onNavigate }) 
 
           <div className="flex items-center gap-2">
             <span className="text-xs bg-black/20 border border-white/20 px-3.5 py-1.5 rounded-full font-headline tracking-wider">
-              {data.meta.studioName} · 2026
+              {data.meta.studioName} · {data.meta.year || '2026'}
             </span>
           </div>
         </motion.div>
 
-        {/* 2 Featured Projects Side-by-Side Grid with Framer Motion */}
+        {/* Dynamic Featured Projects Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 my-auto py-2">
-          {/* Project 1: NexaFlow Cloud */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            whileHover={{ y: -6 }}
-            className="bg-[#151515] rounded-3xl p-6 sm:p-8 border border-white/20 shadow-2xl flex flex-col justify-between transition-shadow hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
-          >
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <span className="text-[10px] font-bold tracking-widest text-[#7B5CFF] bg-[#7B5CFF]/20 px-3 py-1 rounded-full uppercase">
-                  CLOUD & DISTRIBUTED SYSTEMS
-                </span>
-                <span className="text-xs font-mono text-emerald-400">● 50K+ ops/sec</span>
-              </div>
+          {data.projects.map((project: PortfolioProject, idx: number) => {
+            const isCream = project.bgType === 'cream';
+            const cardBg = isCream
+              ? 'bg-[#F8F6EF] text-[#151515] border-[#ded8c4]'
+              : 'bg-[#151515] text-white border-white/20';
 
-              <h3 className="font-headline text-3xl sm:text-4xl text-white uppercase">
-                NEXAFLOW CLOUD
-              </h3>
-
-              <p className="font-text text-sm text-white/80 leading-relaxed">
-                A high-throughput cloud observability platform streaming live server metrics, distributed traces, and canvas-based node topologies with sub-50ms latency.
-              </p>
-
-              <div className="py-2">
-                <NexaFlowDashboardMockup interactive={true} />
-              </div>
-            </div>
-
-            <div className="pt-4 border-t border-white/10 flex items-center justify-between">
-              <a
-                href={data.meta.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-[#7B5CFF] hover:bg-[#6846ed] text-white px-5 py-2.5 rounded-full font-headline text-xs tracking-wider transition-all cursor-pointer"
+            return (
+              <motion.div
+                key={project.id || idx}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 * (idx + 1) }}
+                whileHover={{ y: -6 }}
+                className={`${cardBg} rounded-3xl p-6 sm:p-8 border shadow-2xl flex flex-col justify-between transition-shadow hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)]`}
               >
-                <GithubIcon size={14} />
-                <span>GITHUB REPO</span>
-                <ArrowRight size={13} />
-              </a>
-              <span className="text-xs font-mono text-white/40">React 19 · WebSocket · Go</span>
-            </div>
-          </motion.div>
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <span
+                      className={`text-[10px] font-bold tracking-widest px-3 py-1 rounded-full uppercase ${
+                        isCream
+                          ? 'text-[#7B5CFF] bg-[#7B5CFF]/15'
+                          : 'text-[#7B5CFF] bg-[#7B5CFF]/20'
+                      }`}
+                    >
+                      {project.category}
+                    </span>
+                    {project.metrics && (
+                      <span
+                        className={`text-xs font-mono ${
+                          isCream ? 'text-[#7B5CFF] font-bold' : 'text-emerald-400'
+                        }`}
+                      >
+                        ● {project.metrics}
+                      </span>
+                    )}
+                  </div>
 
-          {/* Project 2: Aura Design System */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            whileHover={{ y: -6 }}
-            className="bg-[#F8F6EF] text-[#151515] rounded-3xl p-6 sm:p-8 border border-[#ded8c4] shadow-2xl flex flex-col justify-between transition-shadow hover:shadow-[0_20px_50px_rgba(0,0,0,0.3)]"
-          >
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <span className="text-[10px] font-bold tracking-widest text-[#7B5CFF] bg-[#7B5CFF]/15 px-3 py-1 rounded-full uppercase">
-                  DESIGN SYSTEM & TOKENS
-                </span>
-                <span className="text-xs font-mono text-[#7B5CFF] font-bold">40+ Components</span>
-              </div>
+                  <h3
+                    className={`font-headline text-3xl sm:text-4xl uppercase ${
+                      isCream ? 'text-[#151515]' : 'text-white'
+                    }`}
+                  >
+                    {project.title}
+                  </h3>
 
-              <h3 className="font-headline text-3xl sm:text-4xl text-[#151515] uppercase">
-                AURA DESIGN TOKENS
-              </h3>
+                  <p
+                    className={`font-text text-sm leading-relaxed ${
+                      isCream ? 'text-[#151515]/80' : 'text-white/80'
+                    }`}
+                  >
+                    {project.description}
+                  </p>
 
-              <p className="font-text text-sm text-[#151515]/80 leading-relaxed">
-                An ergonomic component suite featuring 40+ WCAG AAA compliant primitives, fluid typographic scaling, and zero-runtime CSS variable design tokens.
-              </p>
+                  {/* Visual: Uploaded Image OR Vector Mockup */}
+                  <div className="py-2">
+                    {project.imageUrl ? (
+                      <div className="w-full h-48 sm:h-60 rounded-2xl overflow-hidden border border-black/10 shadow-lg bg-black/5">
+                        <img
+                          src={project.imageUrl}
+                          alt={project.title}
+                          className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                        />
+                      </div>
+                    ) : project.id === 'nexaflow' ? (
+                      <NexaFlowDashboardMockup interactive={true} />
+                    ) : project.id === 'aura-ui' ? (
+                      <AuraUIDesignMockup />
+                    ) : (
+                      <div className="p-4 rounded-2xl bg-black/10 border border-current/10 space-y-2">
+                        {project.features && project.features.length > 0 && (
+                          <ul className="text-xs space-y-1 list-disc list-inside opacity-80">
+                            {project.features.map((f, fIdx) => (
+                              <li key={fIdx}>{f}</li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                </div>
 
-              <div className="py-2">
-                <AuraUIDesignMockup />
-              </div>
-            </div>
-
-            <div className="pt-4 border-t border-[#ded8c4] flex items-center justify-between">
-              <a
-                href={data.meta.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-[#151515] hover:bg-black text-white px-5 py-2.5 rounded-full font-headline text-xs tracking-wider transition-all cursor-pointer"
-              >
-                <Code2 size={14} />
-                <span>EXPLORE TOKENS</span>
-                <ArrowRight size={13} />
-              </a>
-              <span className="text-xs font-mono text-[#151515]/50">TypeScript · Tailwind · Radix</span>
-            </div>
-          </motion.div>
+                <div
+                  className={`pt-4 border-t flex items-center justify-between ${
+                    isCream ? 'border-[#ded8c4]' : 'border-white/10'
+                  }`}
+                >
+                  <div className="flex items-center gap-2">
+                    {(project.githubUrl || data.meta.githubUrl) && (
+                      <a
+                        href={project.githubUrl || data.meta.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-headline text-xs tracking-wider transition-all cursor-pointer ${
+                          isCream
+                            ? 'bg-[#151515] hover:bg-black text-white'
+                            : 'bg-[#7B5CFF] hover:bg-[#6846ed] text-white'
+                        }`}
+                      >
+                        <GithubIcon size={14} />
+                        <span>CODE</span>
+                        <ArrowRight size={13} />
+                      </a>
+                    )}
+                    {project.liveUrl && (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full font-headline text-xs tracking-wider transition-all cursor-pointer ${
+                          isCream
+                            ? 'bg-[#7B5CFF] text-white hover:bg-[#6846ed]'
+                            : 'bg-white/10 text-white hover:bg-white/20'
+                        }`}
+                      >
+                        <ExternalLink size={13} />
+                        <span>LIVE</span>
+                      </a>
+                    )}
+                  </div>
+                  <span
+                    className={`text-xs font-mono ${
+                      isCream ? 'text-[#151515]/50' : 'text-white/40'
+                    }`}
+                  >
+                    {project.status || 'Active'}
+                  </span>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
 
         {/* Bottom Bar */}
