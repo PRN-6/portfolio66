@@ -149,6 +149,21 @@ This document tracks all issues encountered during the development, compilation,
 
 ---
 
+### Issue 10: Mobile Menu CSS Containing Block Trap Fix with React Portal
+- **Requirement**: The user reported: *"the burger menue is not proper in the mobile version fix that"* with screenshot showing the mobile menu squished and overlaying the page content.
+- **Category**: CSS Stacking Context & DOM Portal
+- **Root Cause**:
+  1. The `<header>` element had Tailwind `backdrop-blur-md` (`backdrop-filter: blur(...)`). Under CSS specification standards, any element with `filter` or `backdrop-filter` creates a new containing block for all `position: fixed` descendants.
+  2. Because the mobile drawer was rendered inside `<header>`, its `position: fixed; inset: 0` was constrained to the header's height (~65px) rather than the viewport. This caused the menu contents to squish against each other and transparently overlap the underlying page content (`ContactPage`).
+- **Fix Applied**:
+  1. Used React's `createPortal(..., document.body)` to escape the header's CSS stacking context and mount the mobile menu directly to `document.body`.
+  2. Applied an opaque `#151515` background with explicit viewport dimensions (`w-screen h-[100dvh] fixed inset-0 z-[99999]`).
+  3. Ensured the underlying page is completely covered with zero bleed-through or overlapping text.
+  4. Preserved full Framer Motion animations (`initial={{ opacity: 0, y: -16 }} animate={{ opacity: 1, y: 0 }}`), close button, and active route highlights.
+- **Status**: ✅ **RESOLVED & VERIFIED**
+
+---
+
 ## 🔍 Continuous Diagnostics & Quality Checks
 
 - **TypeScript Compilation (`tsc -b`)**: Passing with 0 errors.
