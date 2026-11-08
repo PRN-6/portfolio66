@@ -2,7 +2,8 @@
 
 A sleek, modern portfolio website template designed with **zero infinite vertical scroll** — each section is a self-contained, screen-fitting view accessible directly from the top navigation bar or keyboard arrows.
 
-Built with **React 19**, **TypeScript**, **Tailwind CSS**, and **Framer Motion**:
+Built with **React 19**, **TypeScript**, **Tailwind CSS**, **Framer Motion**, and **[@leozodiac/swarm66](https://www.npmjs.com/package/@leozodiac/swarm66)**:
+- **Autonomous AI Swarm Construction**: Powered by `@leozodiac/swarm66`, the website starts blank while autonomous Figma-style AI cursors construct the page live before your eyes, then swirl and converge into your mouse cursor to vanish into thin air. Includes a **"REPLAY SWARM"** button in the navbar to re-trigger the animation anytime.
 - **Night (`#151515`)**: Deep, restful dark background.
 - **Cream (`#F8F6EF`)**: Soft warm tint for comfortable reading.
 - **Moon Violet (`#7B5CFF`)**: Bold energetic accent for headlines, primary buttons, and focus points.

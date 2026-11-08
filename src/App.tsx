@@ -12,6 +12,8 @@ import { ArticlesPage } from './components/pages/ArticlesPage';
 import { FaqPage } from './components/pages/FaqPage';
 import { ContactPage } from './components/pages/ContactPage';
 import { motion, AnimatePresence } from 'framer-motion';
+import { enableSwarm } from '@leozodiac/swarm66';
+import type { DomSwarmInstance } from '@leozodiac/swarm66';
 
 const PAGE_ORDER: NavPageId[] = [
   'home',
@@ -69,6 +71,46 @@ export function App() {
 
   const currentIndex = PAGE_ORDER.indexOf(activePage);
 
+  const [swarmInstance, setSwarmInstance] = useState<DomSwarmInstance | null>(null);
+
+  // Initialize autonomous AI Figma-style Swarm engine (@leozodiac/swarm66)
+  useEffect(() => {
+    try {
+      const swarm = enableSwarm({
+        agentCount: 16,
+        colors: ['#7B5CFF', '#00D2D3', '#FF5722', '#FECA57', '#E91E63', '#8BC34A'],
+        hideOnStart: true,
+        vanishAtCursor: true,
+        typewriterEffect: true,
+        concurrency: 4,
+      });
+
+      setSwarmInstance(swarm);
+
+      return () => {
+        swarm?.destroy?.();
+      };
+    } catch (err) {
+      console.warn('Swarm66 initialization notice:', err);
+    }
+  }, []);
+
+  // When active page changes, trigger swarm re-scan/construction for the active view
+  useEffect(() => {
+    if (swarmInstance && typeof swarmInstance.handlePageNavigation === 'function') {
+      const timer = setTimeout(() => {
+        swarmInstance.handlePageNavigation();
+      }, 120);
+      return () => clearTimeout(timer);
+    }
+  }, [activePage, swarmInstance]);
+
+  const handleReplaySwarm = () => {
+    if (swarmInstance && typeof swarmInstance.replay === 'function') {
+      swarmInstance.replay();
+    }
+  };
+
   const isLocalhost =
     typeof window !== 'undefined' &&
     (window.location.hostname === 'localhost' ||
@@ -81,6 +123,7 @@ export function App() {
         studioName={data.meta.studioName}
         activePage={activePage}
         onSelectPage={(page) => setActivePage(page)}
+        onReplaySwarm={handleReplaySwarm}
       />
 
       {/* Main Single Page View Container with Framer Motion transitions (Responsive scrollable container) */}

@@ -190,6 +190,22 @@ This document tracks all issues encountered during the development, compilation,
 
 ---
 
+### Issue 12: @leozodiac/swarm66 Autonomous AI Cursor Construction Engine Integration
+- **Requirement**: The user requested: *"npm install @leozodiac/swarm66@latest i have added this so add to my project"*.
+- **Category**: Dynamic Visual Effects & Interactive Automation
+- **Implementation**:
+  1. Installed `@leozodiac/swarm66@latest` (`^1.0.2`).
+  2. Integrated `enableSwarm` in `App.tsx` with clean lifecycle cleanup on unmount:
+     - Configured 16 autonomous cursor agents with custom studio colorway (`['#7B5CFF', '#00D2D3', '#FF5722', '#FECA57', '#E91E63', '#8BC34A']`).
+     - Enabled `hideOnStart: true` (page begins blank and agents build it live) and `vanishAtCursor: true` (cursors converge into the user's mouse and vanish).
+     - Enabled `typewriterEffect: true` for live typewriter drafting.
+  3. Added dynamic route reconstruction via `swarmInstance.handlePageNavigation()` when navigating between pages (`HOME`, `ABOUT`, `PROJECTS`, etc.).
+  4. Added a `"REPLAY SWARM"` button in `TopNavbar.tsx` (both desktop navigation bar and mobile drawer) so visitors can re-trigger the construction experience on demand.
+  5. Documented in `README.md`.
+- **Status**: ✅ **RESOLVED & VERIFIED**
+
+---
+
 ## 🔍 Continuous Diagnostics & Quality Checks
 
 - **TypeScript Compilation (`tsc -b`)**: Passing with 0 errors.

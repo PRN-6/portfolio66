@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { CatLogoBadge } from './illustrations/CatLogoBadge';
-import { Menu, X, ArrowUpRight } from 'lucide-react';
+import { Menu, X, ArrowUpRight, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export type NavPageId =
@@ -18,12 +18,14 @@ interface TopNavbarProps {
   studioName?: string;
   activePage: NavPageId;
   onSelectPage: (page: NavPageId) => void;
+  onReplaySwarm?: () => void;
 }
 
 export const TopNavbar: React.FC<TopNavbarProps> = ({
   studioName = 'YOUR NAME',
   activePage,
   onSelectPage,
+  onReplaySwarm,
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -122,7 +124,20 @@ export const TopNavbar: React.FC<TopNavbarProps> = ({
           </nav>
 
           {/* Right CTA (Desktop & Tablet) */}
-          <div className="hidden sm:flex items-center gap-3">
+          <div className="hidden sm:flex items-center gap-2.5">
+            {onReplaySwarm && (
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={onReplaySwarm}
+                title="Watch AI Figma Cursors assemble the page live (@leozodiac/swarm66)"
+                className="flex items-center gap-1.5 text-xs font-headline tracking-wider px-3.5 py-2 rounded-full bg-white/5 hover:bg-[#7B5CFF]/20 border border-white/10 hover:border-[#7B5CFF]/40 text-white/80 hover:text-white transition-all cursor-pointer"
+              >
+                <Sparkles size={13} className="text-[#FECA57]" />
+                <span className="hidden md:inline">REPLAY SWARM</span>
+              </motion.button>
+            )}
+
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -238,7 +253,20 @@ export const TopNavbar: React.FC<TopNavbarProps> = ({
                 </div>
 
                 {/* Bottom Actions & Studio Footer */}
-                <div className="pt-4 border-t border-white/10 space-y-3 flex-shrink-0">
+                <div className="pt-4 border-t border-white/10 space-y-2.5 flex-shrink-0">
+                  {onReplaySwarm && (
+                    <button
+                      onClick={() => {
+                        onReplaySwarm();
+                        setMobileMenuOpen(false);
+                      }}
+                      className="w-full bg-white/5 hover:bg-white/10 text-white text-center py-2.5 rounded-full font-headline tracking-widest text-xs uppercase border border-white/10 active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer"
+                    >
+                      <Sparkles size={14} className="text-[#FECA57]" />
+                      <span>REPLAY AI SWARM</span>
+                    </button>
+                  )}
+
                   <button
                     onClick={() => handleNavClick('contact')}
                     className="w-full bg-[#7B5CFF] hover:bg-[#6846ed] text-white text-center py-3.5 rounded-full font-headline tracking-widest text-sm shadow-xl active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer"
